@@ -1,8 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { getApis, Api } from './apiCalls'
-
+import { getApis, Api } from '../../apiCalls';
+import {CardContainer} from '../CardContainer/CardContainer'
 
 type Props = {}
 
@@ -26,6 +25,7 @@ class App extends React.Component<Props> {
      console.log(this.state)
     return (
       <div className="App">
+        <CardContainer apiList={this.state.apiList}></CardContainer>
     </div>
   );
 }
