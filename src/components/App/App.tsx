@@ -36,7 +36,7 @@ class App extends React.Component<Props> {
     })
       stateObj.Categories && (
         matchingCards = matchingCards.filter(api => {
-          return api.Category.toLowerCase() === stateObj.Categories.toLowerCase()
+          return api.Category === stateObj.Categories
         }))
       
       stateObj.Auth !== 'Empty' && (
@@ -68,7 +68,7 @@ class App extends React.Component<Props> {
      console.log(this.state)
     return (
       <div className="App">
-        <FilterForm filter={this.filter}/>
+        <FilterForm filter={this.filter} apiList={this.state.apiList}/>
         <Route exact path='/' render={() => {
           return <CardContainer apiList={this.state.currentApis}></CardContainer>
         }}/>
