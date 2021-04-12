@@ -1,30 +1,26 @@
 import React from 'react';
 import {Api} from '../../apiCalls'
+import {ApiCard} from '../ApiCard/ApiCard'
+import './CardContainer.css'
 
 type ApiProp = {
-  apiList: 
-
-    {
-      API : string;
-      Description: string;
-      Auth: string;
-      HTTPS: boolean;
-      Cors: string;
-      Link: string;
-      Category: string;
-  }[]
-  
+  apiList: Api[]
 }
 export const CardContainer = ({apiList}: ApiProp) => {
 
-  const ApiCards = apiList.map(apiObj => {
-    return <article>
-    <p>
-      {apiObj.API}
-    </p>
-    </article>
+  const ApiCards = apiList.map((apiObj, index) => {
+    return <ApiCard
+    API={apiObj.API}
+    Auth={apiObj.Auth}
+    Category={apiObj.Category}
+    Cors={apiObj.Cors}
+    Description={apiObj.Description}
+    HTTPS={apiObj.HTTPS}
+    Link={apiObj.Link}
+    key={index}
+    />
   })
 
-  return <div>{ApiCards}</div>
+  return <div className={'card-container'}>{ApiCards}</div>;
 
 }

@@ -1,0 +1,9 @@
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card-container article {
+  border: 2px solid blue;
+  width: 100%
+}
