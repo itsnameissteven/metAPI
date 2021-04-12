@@ -27,9 +27,19 @@ export class FilterForm extends React.Component<FilterProps> {
   }
 
   handleChange = (e: any):void => {
-    this.setState({...this.state, [e.target.name]: e.target.value}, () => {
-      return this.props.filter(this.state)
-    })
+    if (e.target.name !== 'HTTPS') {
+
+      this.setState({...this.state, [e.target.name]: e.target.value}, () => {
+        return this.props.filter(this.state)
+      })
+    } 
+    else {
+      let boolean: boolean;
+      e.target.value.includes('No')? boolean = false : boolean = true;
+      this.setState({...this.state, [e.target.name]: boolean}, () => {
+        return this.props.filter(this.state)
+      })    
+    }
   }
 
   render() {
@@ -39,7 +49,7 @@ export class FilterForm extends React.Component<FilterProps> {
       onSubmit={(e) => e.preventDefault()}>
         <input name="search" placeholder="Search"></input>
         <select name="Categories">
-          <option>All Categories</option>
+          <option value=''>All Categories</option>
           <option>Animals</option>
           <option>Anime</option>
           <option>Anti Malware</option>
@@ -88,6 +98,7 @@ export class FilterForm extends React.Component<FilterProps> {
           <option>Weather</option>
         </select>
         <select name="Auth">
+          <option value='empty'>Select an Auth option</option>
           <option>ApiKey</option>
           <option value=''>No</option>
           <option>OAuth</option>
@@ -98,8 +109,9 @@ export class FilterForm extends React.Component<FilterProps> {
           <option>No HTTPS</option>
         </select>
         <select name="Cors">
+          <option value=''>Select a Cors option</option>
           <option>Yes</option>
-          <option value=''>No</option>
+          <option>No</option>
           <option>Unknown</option>
         </select>
       </form>
