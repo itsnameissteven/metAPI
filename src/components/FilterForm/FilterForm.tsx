@@ -10,7 +10,8 @@ export interface FilterState {
   }
 
 type FilterProps = {
-  filter: any
+  filter: any;
+  apiList: Api[];
 }
 
 export class FilterForm extends React.Component<FilterProps> {
@@ -42,6 +43,13 @@ export class FilterForm extends React.Component<FilterProps> {
     }
   }
 
+  allCategories = ():string[] => this.props.apiList.reduce((categories: string[], {Category}) => {
+    if (!categories.includes(Category)) categories.push(Category)
+    return categories
+  }, []);
+
+  categoryOptions = () => this.allCategories().map(category => <option>{category}</option>)
+
   render() {
     return (
       <form
@@ -50,52 +58,7 @@ export class FilterForm extends React.Component<FilterProps> {
         <input name="search" placeholder="Search"></input>
         <select name="Categories">
           <option value=''>All Categories</option>
-          <option>Animals</option>
-          <option>Anime</option>
-          <option>Anti Malware</option>
-          <option>Art & Design</option>
-          <option>Books</option>
-          <option>Business</option>
-          <option>Calendar</option>
-          <option>Cloud Storage & File sharing</option>
-          <option>Continuous integration</option> 
-          <option>Cryptocurrency</option>
-          <option>Currency Exchange</option>
-          <option>Data Validation</option>
-          <option>Development</option>
-          <option>Dictionaries</option>
-          <option>Documents & Productivity</option>
-          <option>Environment</option>
-          <option>Events</option>
-          <option>Finance</option>
-          <option>Food & Drink</option>
-          <option>Games & Comics</option>
-          <option>GeoCoding</option>
-          <option>Government</option>
-          <option>Health</option>
-          <option>Jobs</option>
-          <option>Machine Learning</option>
-          <option>Music</option>
-          <option>News</option>
-          <option>Open Data</option>
-          <option>Open Source Projects</option>
-          <option>Patent</option>
-          <option>Personality</option>
-          <option>Phone</option>
-          <option>Photography</option>
-          <option>Science &Math</option>
-          <option>Security</option>
-          <option>Shopping</option>
-          <option>Social</option>
-          <option>Sports &Fitness</option>
-          <option>Test Data</option>
-          <option>Text Analysis</option>
-          <option>Tracking</option>
-          <option>Transportation</option>
-          <option>URL Shorteners</option>
-          <option>Vehicle</option>
-          <option>Video</option>
-          <option>Weather</option>
+          {this.categoryOptions()}
         </select>
         <select name="Auth">
           <option value='empty'>Select an Auth option</option>
