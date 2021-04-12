@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import { getApis, Api } from '../../apiCalls';
 import {CardContainer} from '../CardContainer/CardContainer'
-
+import {FeaturedCard} from '../FeaturedCard/FeaturedCard'
+import {Route} from 'react-router-dom'
 type Props = {}
 
 class App extends React.Component<Props> {
@@ -25,7 +26,12 @@ class App extends React.Component<Props> {
      console.log(this.state)
     return (
       <div className="App">
-        <CardContainer apiList={this.state.apiList}></CardContainer>
+        <Route exact path='/' render={() => {
+          return <CardContainer apiList={this.state.apiList}></CardContainer>
+        }}/>
+      <Route path='/:title' render={({match}) => {
+        return <FeaturedCard Api={this.state.apiList.find(api => api.API === match.params.title)}/>
+    }}/>
     </div>
   );
 }
