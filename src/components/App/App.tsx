@@ -13,23 +13,25 @@ type Props = {}
 class App extends React.Component<Props> {
   state : {
     apiList: Api[]
+    currentApis: Api[]
+
   };
   constructor(props: Props) {
     super(props)
     this.state = {
-      apiList: []
+      apiList: [],
+      currentApis: [],
     }
   }
 
   componentDidMount() {
     getApis()
-    .then(data => this.setState({apiList: data.entries})) 
+    .then(data => this.setState({apiList: data.entries, currentApis: data.entries})) 
   }
 
   filter = (stateObj: FilterState):any => {
     let matchingCards: Api[] = [];
-    if (this.state) {
-            matchingCards = this.state.apiList.filter(api => {
+      matchingCards = this.state.apiList.filter(api => {
       return api.API.includes(stateObj.search)
     })
       stateObj.Categories && (
@@ -39,21 +41,27 @@ class App extends React.Component<Props> {
       
       stateObj.Auth !== 'Empty' && (
         matchingCards = matchingCards.filter(api => {
-          console.log(stateObj.Auth)
           return api.Auth.toLowerCase() === stateObj.Auth.toLowerCase();
         })
       )
 
-      // stateObj.HTTPS && (
+      stateObj.HTTPS !== '' && (
+        matchingCards = matchingCards.filter(api => {
+          return api.HTTPS === stateObj.HTTPS;
+        })
+      )
 
-      // )
-
-
-  }
+      stateObj.Cors !== '' && (
+        matchingCards = matchingCards.filter(api => {
+          return api.Cors.toLowerCase() === stateObj.Cors.toLowerCase();
+        })
+      )
 
     console.log(matchingCards)
-    if (matchingCards.length) return matchingCards;
-    else return this.state.apiList
+    if (matchingCards.length) {
+      this.setState({...this.state, currentApis: matchingCards})
+      return matchingCards
+    } else return this.state.apiList
   }
 
   render() {
@@ -62,7 +70,7 @@ class App extends React.Component<Props> {
       <div className="App">
         <FilterForm filter={this.filter}/>
         <Route exact path='/' render={() => {
-          return <CardContainer apiList={this.state.apiList}></CardContainer>
+          return <CardContainer apiList={this.state.currentApis}></CardContainer>
         }}/>
       <Route path='/:title' render={({match}) => {
         return <FeaturedCard Api={this.state.apiList.find(api => api.API === match.params.title)}/>
