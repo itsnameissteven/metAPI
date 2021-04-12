@@ -3,7 +3,11 @@ import './App.css';
 import { getApis, Api } from '../../apiCalls';
 import {CardContainer} from '../CardContainer/CardContainer'
 import {FeaturedCard} from '../FeaturedCard/FeaturedCard'
+import {FilterForm} from '../FilterForm/FilterForm'
+import { FilterState } from '../FilterForm/FilterForm'
 import {Route} from 'react-router-dom'
+import { getEnabledCategories } from 'node:trace_events';
+import { isCompositeComponentWithType } from 'react-dom/test-utils';
 type Props = {}
 
 class App extends React.Component<Props> {
@@ -22,10 +26,41 @@ class App extends React.Component<Props> {
     .then(data => this.setState({apiList: data.entries})) 
   }
 
+  filter = (stateObj: FilterState):any => {
+    let matchingCards: Api[] = [];
+    if (this.state) {
+            matchingCards = this.state.apiList.filter(api => {
+      return api.API.includes(stateObj.search)
+    })
+      stateObj.Categories && (
+        matchingCards = matchingCards.filter(api => {
+          return api.Category.toLowerCase() === stateObj.Categories.toLowerCase()
+        }))
+      
+      stateObj.Auth !== 'Empty' && (
+        matchingCards = matchingCards.filter(api => {
+          console.log(stateObj.Auth)
+          return api.Auth.toLowerCase() === stateObj.Auth.toLowerCase();
+        })
+      )
+
+      // stateObj.HTTPS && (
+
+      // )
+
+
+  }
+
+    console.log(matchingCards)
+    if (matchingCards.length) return matchingCards;
+    else return this.state.apiList
+  }
+
   render() {
      console.log(this.state)
     return (
       <div className="App">
+        <FilterForm filter={this.filter}/>
         <Route exact path='/' render={() => {
           return <CardContainer apiList={this.state.apiList}></CardContainer>
         }}/>
