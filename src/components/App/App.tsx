@@ -5,6 +5,7 @@ import { CardContainer } from "../CardContainer/CardContainer";
 import { FeaturedCard } from "../FeaturedCard/FeaturedCard";
 import { FilterForm } from "../FilterForm/FilterForm";
 import { FilterState } from "../FilterForm/FilterForm";
+import { Note } from '../Note/Note';
 import { Route } from "react-router-dom";
 import { getEnabledCategories } from "node:trace_events";
 import { isCompositeComponentWithType } from "react-dom/test-utils";
@@ -112,10 +113,14 @@ class App extends React.Component<Props> {
           path="/:title"
           render={({ match }) => {
             const data = this.state.apiList.find((api) => api.API === match.params.title);
-            // const notes = this.state.savedNotes.find(savedNote => savedNote.api)
             if (data) {
+              const myNotes = this.state.savedNotes.find(savedNote => savedNote.name === data.API)
+              const savedNotes = myNotes?.notes.map(note => <Note note={note}/>)
               return (
-                <FeaturedCard {...data} addToFavorites={this.addToFavorites} saveNote={this.saveNote}/>
+                <>
+                  <FeaturedCard {...data} addToFavorites={this.addToFavorites} saveNote={this.saveNote}/>
+                  {savedNotes}
+                </>
               );
             }
           }}

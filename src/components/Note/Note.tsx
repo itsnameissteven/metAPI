@@ -1,7 +1,11 @@
 import React from 'react';
 
-export const Note = () => {
+type Note = {
+  note: string
+}
+
+export const Note = ({note}: Note) => {
   return (
-    <h1> hehehe</h1>
+    <p> {note}</p>
   )
 }
