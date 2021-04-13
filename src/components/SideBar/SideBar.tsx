@@ -4,7 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi"
 import { CardContainer } from '../CardContainer/CardContainer'
 import {Api} from '../../apiCalls'
 
-const favorite: Api = {
+const savedApi: Api = {
   API: "Cat Facts",
   Auth: "",
   Category: "Animals",
@@ -21,8 +21,8 @@ export const SideBar = (props:{}) => {
       <GiHamburgerMenu 
       className="hamburger"
       onClick={() => document.querySelector('.side-bar')?.classList.toggle('open')}></GiHamburgerMenu>
-      <h2>Favorites</h2>
-      <CardContainer apiList={[favorite]}></CardContainer>
+      <h2 className="section-label">Saved Apis</h2>
+      <CardContainer apiList={[savedApi, savedApi]}></CardContainer>
     </div>
   )
 
