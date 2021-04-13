@@ -1,7 +1,9 @@
 .featured-card {
-  margin: 0 auto;
+  margin: 100px auto;
   width: 30%;
   border: 2px solid black;
+  border-radius: 6px;
+  padding: 20px;
 }
 
 .featured-card__notes {

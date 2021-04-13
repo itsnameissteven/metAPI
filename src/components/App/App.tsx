@@ -8,6 +8,7 @@ import { FilterState } from "../FilterForm/FilterForm";
 import { Route } from "react-router-dom";
 import { getEnabledCategories } from "node:trace_events";
 import { isCompositeComponentWithType } from "react-dom/test-utils";
+
 type Props = {};
 
 class App extends React.Component<Props> {
@@ -78,13 +79,10 @@ class App extends React.Component<Props> {
         <Route
           path="/:title"
           render={({ match }) => {
-            return (
-              <FeaturedCard
-                details={this.state.apiList.find(
-                  (api) => api.API === match.params.title
-                )}
-              />
+            const data = this.state.apiList.find(
+              (api) => api.API === match.params.title
             );
+            return <FeaturedCard {...data} />;
           }}
         />
       </div>
