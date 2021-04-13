@@ -2,7 +2,7 @@
   float: left;
   height: 100%;
   position:fixed;
-  background-color: grey;
+  background-color: whitesmoke;
   transform: translate3d(-88%, 0px, 0px);
   transition: all 0.5s ease 0s;
   visibility: visible;
@@ -15,14 +15,27 @@
   transition: all 0.5s ease 0s;
 }
 
+.section-label {
+  margin-bottom: 50px;
+  font-size: 2.3em;
+  border-bottom: 1px solid grey;
+  padding: 10px;
+}
+
 .hamburger {
   float: right;
   width: 30px;
   height: 30px;
   margin: 3px;
+  margin-bottom: 50;
 }
 
 .side-bar .card-container {
   display: flex;
   flex-flow: column;
+  padding-right: 30px;
+}
+
+.side-bar .card-container .api-card {
+  border-color: grey;
 }
