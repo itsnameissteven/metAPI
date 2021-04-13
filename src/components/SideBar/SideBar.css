@@ -1,0 +1,28 @@
+.side-bar {
+  float: left;
+  height: 100%;
+  position:fixed;
+  background-color: grey;
+  transform: translate3d(-88%, 0px, 0px);
+  transition: all 0.5s ease 0s;
+  visibility: visible;
+  width: 20%;
+}
+
+.open {
+  transform: translate3d(0%, 0px, 0px);
+  visibility: visible;
+  transition: all 0.5s ease 0s;
+}
+
+.hamburger {
+  float: right;
+  width: 30px;
+  height: 30px;
+  margin: 3px;
+}
+
+.side-bar .card-container {
+  display: flex;
+  flex-flow: column;
+}
