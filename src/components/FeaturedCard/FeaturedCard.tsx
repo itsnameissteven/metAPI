@@ -37,6 +37,7 @@ export class FeaturedCard extends Component<Props> {
           className="featured-card__notes"
           placeholder="Notes"
         ></textarea>
+        <button onClick={() => console.log(true)}>Save Notes</button>
         <button
           onClick={() =>
             this.state.API && this.props.addToFavorites(this.state)

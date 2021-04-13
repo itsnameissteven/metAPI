@@ -10,12 +10,17 @@ import { getEnabledCategories } from "node:trace_events";
 import { isCompositeComponentWithType } from "react-dom/test-utils";
 
 type Props = {};
+type Notes = {
+  API: string,
+  notes: string[]
+}
 
 class App extends React.Component<Props> {
   state: {
     apiList: Api[];
     currentApis: Api[];
     favorites: Api[];
+    savedNotes: Notes[]
   };
   constructor(props: Props) {
     super(props);
@@ -23,6 +28,7 @@ class App extends React.Component<Props> {
       apiList: [],
       currentApis: [],
       favorites: [],
+      savedNotes: []
     };
   }
 
@@ -57,7 +63,6 @@ class App extends React.Component<Props> {
         return api.Cors.toLowerCase() === stateObj.Cors.toLowerCase();
       }));
 
-    console.log(matchingCards);
     if (matchingCards.length) {
       this.setState({ ...this.state, currentApis: matchingCards });
       return matchingCards;
@@ -70,7 +75,6 @@ class App extends React.Component<Props> {
   };
 
   render() {
-    console.log(this.state);
     return (
       <div className="App">
         <FilterForm filter={this.filter} apiList={this.state.apiList} />
