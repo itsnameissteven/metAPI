@@ -32,7 +32,9 @@ class App extends React.Component<Props> {
   filter = (stateObj: FilterState):any => {
     let matchingCards: Api[] = [];
       matchingCards = this.state.apiList.filter(api => {
-      return api.API.includes(stateObj.search)
+      return api.API.toLowerCase().includes(stateObj.search.toLowerCase()) 
+      // || 
+      // api.Description.toLowerCase().includes(stateObj.search.toLowerCase())
     })
       stateObj.Categories && (
         matchingCards = matchingCards.filter(api => {
@@ -68,6 +70,7 @@ class App extends React.Component<Props> {
      console.log(this.state)
     return (
       <div className="App">
+        <h1>metAPI</h1>
         <FilterForm filter={this.filter} apiList={this.state.apiList}/>
         <Route exact path='/' render={() => {
           return <CardContainer apiList={this.state.currentApis}></CardContainer>
