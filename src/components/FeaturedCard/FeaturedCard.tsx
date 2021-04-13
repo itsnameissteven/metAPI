@@ -1,16 +1,24 @@
-import {Api} from '../../apiCalls';
+import { Api } from "../../apiCalls";
+import "./FeaturedCard.css";
 
-export const FeaturedCard = ({Api}:any) => {
+export const FeaturedCard = ({ details }: any) => {
+  if (!details) {
+    return null;
+  }
   return (
-  <div>
-    <h2>{Api.API}</h2>
-        <p>{Api.Auth}</p>
-        <p>{Api.Cors}</p>
-        <p>{Api.HTTPS}</p>
-        <p>{Api.Category}</p>
-        <p>{Api.Description}</p>
-        <p>{Api.Link}</p>
-        <textarea placeholder='Notes'></textarea>
-  </div>
-    )
-}
+    <div className="featured-card">
+      <h2>{details.API}</h2>
+      <p>Authentication: {details.Auth}</p>
+      <p>Cors? {details.Cors}</p>
+      <p>{details.HTTPS}</p>
+      <p>Category: {details.Category}</p>
+      <p>{details.Description}</p>
+      <p>
+        <a href={details.Link} target="_blank">
+          more details
+        </a>
+      </p>
+      <textarea className="featured-card__notes" placeholder="Notes"></textarea>
+    </div>
+  );
+};

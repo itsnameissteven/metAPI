@@ -1,0 +1,12 @@
+.featured-card {
+  margin: 0 auto;
+  width: 30%;
+  border: 2px solid black;
+}
+
+.featured-card__notes {
+  width: 90%;
+  height: 150px;
+  resize: vertical;
+  padding: 20px;
+}
