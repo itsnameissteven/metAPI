@@ -9,13 +9,13 @@ export class FeaturedCard extends Component<Props> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      API: props.API!,
-      Description: props.Description!,
-      Auth: props.Auth!,
-      HTTPS: props.HTTPS!,
-      Cors: props.Cors!,
-      Link: props.Link!,
-      Category: props.Category!,
+      API: props.API,
+      Description: props.Description,
+      Auth: props.Auth,
+      HTTPS: props.HTTPS,
+      Cors: props.Cors,
+      Link: props.Link,
+      Category: props.Category,
     };
   }
 

@@ -65,7 +65,8 @@ class App extends React.Component<Props> {
   };
 
   addToFavorites = (ApiCard: Api) => {
-    this.setState({ favorites: ApiCard });
+    const validate = this.state.favorites.some((element) => element.API === ApiCard.API);
+    !validate && this.setState({ favorites: [...this.state.favorites, ApiCard] });
   };
 
   render() {
