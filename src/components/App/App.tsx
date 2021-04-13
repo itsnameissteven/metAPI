@@ -15,12 +15,14 @@ class App extends React.Component<Props> {
   state: {
     apiList: Api[];
     currentApis: Api[];
+    favorites: Api[];
   };
   constructor(props: Props) {
     super(props);
     this.state = {
       apiList: [],
       currentApis: [],
+      favorites: [],
     };
   }
 
@@ -62,6 +64,10 @@ class App extends React.Component<Props> {
     } else return this.state.apiList;
   };
 
+  addToFavorites = (ApiCard: Api) => {
+    this.setState({ favorites: ApiCard });
+  };
+
   render() {
     console.log(this.state);
     return (
@@ -82,7 +88,9 @@ class App extends React.Component<Props> {
             const data = this.state.apiList.find(
               (api) => api.API === match.params.title
             );
-            return <FeaturedCard {...data} />;
+            return (
+              <FeaturedCard {...data} addToFavorites={this.addToFavorites} />
+            );
           }}
         />
       </div>

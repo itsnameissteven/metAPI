@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Api } from "../../apiCalls";
+import { Api } from "../../apiCalls";
 import "./FeaturedCard.css";
 
 type Props = {
@@ -10,6 +10,7 @@ type Props = {
   Cors?: string;
   Link?: string;
   Category?: string;
+  addToFavorites: (ApiCard: Api) => void;
 };
 
 export class FeaturedCard extends Component<Props> {
@@ -39,6 +40,7 @@ export class FeaturedCard extends Component<Props> {
           className="featured-card__notes"
           placeholder="Notes"
         ></textarea>
+        <button>Add to Favorites</button>
       </div>
     );
   }
