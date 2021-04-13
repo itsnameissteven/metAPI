@@ -76,10 +76,22 @@ class App extends React.Component<Props> {
   };
 
   saveNote = (ApiCard: Api, note: string) => {
+    const hasSavedNotes = this.state.savedNotes.some(note => note.API === ApiCard.API)
+    if(hasSavedNotes) {
+      const updatedNotes = this.state.savedNotes.map( savedNote => {
+        if(savedNote.API === ApiCard.API) {
+          savedNote.notes.push(note)
+        }
+        return savedNote
+      })
+      return this.setState({ savedNotes: updatedNotes})
+    } 
+
     this.setState({ savedNotes: [...this.state.savedNotes, {
       API: ApiCard.API,
       notes: [note]
     }]})
+    
   }
 
   render() {
