@@ -1,5 +1,6 @@
 import React from 'react'
 import {Api} from '../../apiCalls'
+import './FilterForm.css'
 
 export interface FilterState {
   search: string;
@@ -55,8 +56,8 @@ export class FilterForm extends React.Component<FilterProps> {
       <form
       onChange={this.handleChange}
       onSubmit={(e) => e.preventDefault()}>
-        <input name="search" placeholder="Search"></input>
-        <select name="Categories">
+        <input name="search" placeholder="Search" className="search-bar"></input>
+        <select name="Categories" className="categories">
           <option value=''>All Categories</option>
           {this.categoryOptions()}
         </select>
