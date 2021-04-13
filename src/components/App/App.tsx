@@ -12,7 +12,7 @@ import { ApiCard } from "../ApiCard/ApiCard";
 
 type Props = {};
 type Notes = {
-  API: string,
+  name: string,
   notes: string[]
 }
 
@@ -75,11 +75,12 @@ class App extends React.Component<Props> {
     !validate && this.setState({ favorites: [...this.state.favorites, ApiCard] });
   };
 
-  saveNote = (ApiCard: Api, note: string) => {
-    const hasSavedNotes = this.state.savedNotes.some(note => note.API === ApiCard.API)
+  saveNote = (ApiName: string, note: string) => {
+    if(!note) return null;
+    const hasSavedNotes = this.state.savedNotes.some(note => note.name === ApiName)
     if(hasSavedNotes) {
       const updatedNotes = this.state.savedNotes.map( savedNote => {
-        if(savedNote.API === ApiCard.API) {
+        if(savedNote.name === ApiName) {
           savedNote.notes.push(note)
         }
         return savedNote
@@ -88,10 +89,10 @@ class App extends React.Component<Props> {
     } 
 
     this.setState({ savedNotes: [...this.state.savedNotes, {
-      API: ApiCard.API,
+      name: ApiName,
       notes: [note]
     }]})
-    
+
   }
 
   render() {
@@ -110,9 +111,8 @@ class App extends React.Component<Props> {
         <Route
           path="/:title"
           render={({ match }) => {
-            const data = this.state.apiList.find(
-              (api) => api.API === match.params.title
-            );
+            const data = this.state.apiList.find((api) => api.API === match.params.title);
+            // const notes = this.state.savedNotes.find(savedNote => savedNote.api)
             if (data) {
               return (
                 <FeaturedCard {...data} addToFavorites={this.addToFavorites} saveNote={this.saveNote}/>

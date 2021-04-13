@@ -4,7 +4,7 @@ import "./FeaturedCard.css";
 
 type Props = Api & { 
   addToFavorites: (ApiCard: Api) => void, 
-  saveNote: (ApiCard: Api, note:string) => void 
+  saveNote: (ApiName: string, note: string) => void 
 };
 
 export class FeaturedCard extends Component<Props> {
@@ -27,6 +27,11 @@ export class FeaturedCard extends Component<Props> {
     this.setState({note: event.target.value})
   }
 
+  saveCurrentNote = () => {
+    this.props.saveNote(this.state.API, this.state.note);
+    this.setState({note: ''});
+  }
+
   render() {
     return (
       <div className="featured-card">
@@ -47,8 +52,8 @@ export class FeaturedCard extends Component<Props> {
           className="featured-card__notes"
           placeholder="Notes"
           onChange={this.handleChange}
-        ></textarea>
-        <button onClick={() => this.props.saveNote(this.state, this.state.note)}>Save Notes</button>
+        />
+        <button onClick={this.saveCurrentNote}>Save Notes</button>
         <button
           onClick={() =>
             this.state.API && this.props.addToFavorites(this.state)
