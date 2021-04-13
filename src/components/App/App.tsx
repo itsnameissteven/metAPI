@@ -8,6 +8,7 @@ import { FilterState } from "../FilterForm/FilterForm";
 import { Route } from "react-router-dom";
 import { getEnabledCategories } from "node:trace_events";
 import { isCompositeComponentWithType } from "react-dom/test-utils";
+import { ApiCard } from "../ApiCard/ApiCard";
 
 type Props = {};
 type Notes = {
@@ -74,6 +75,13 @@ class App extends React.Component<Props> {
     !validate && this.setState({ favorites: [...this.state.favorites, ApiCard] });
   };
 
+  saveNote = (ApiCard: Api, note: string) => {
+    this.setState({ savedNotes: [...this.state.savedNotes, {
+      API: ApiCard.API,
+      notes: [note]
+    }]})
+  }
+
   render() {
     return (
       <div className="App">
@@ -95,7 +103,7 @@ class App extends React.Component<Props> {
             );
             if (data) {
               return (
-                <FeaturedCard {...data} addToFavorites={this.addToFavorites} />
+                <FeaturedCard {...data} addToFavorites={this.addToFavorites} saveNote={this.saveNote}/>
               );
             }
           }}
