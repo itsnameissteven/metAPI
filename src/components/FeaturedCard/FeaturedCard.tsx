@@ -2,27 +2,24 @@ import React, { Component } from "react";
 import { Api } from "../../apiCalls";
 import "./FeaturedCard.css";
 
-type Props = {
-  API?: string;
-  Description?: string;
-  Auth?: string;
-  HTTPS?: boolean;
-  Cors?: string;
-  Link?: string;
-  Category?: string;
-  addToFavorites: (ApiCard: Api) => void;
-};
+type Props = Api & { addToFavorites: (ApiCard: Api) => void };
 
 export class FeaturedCard extends Component<Props> {
+  state: Api;
   constructor(props: Props) {
     super(props);
-    this.state = {};
+    this.state = {
+      API: props.API!,
+      Description: props.Description!,
+      Auth: props.Auth!,
+      HTTPS: props.HTTPS!,
+      Cors: props.Cors!,
+      Link: props.Link!,
+      Category: props.Category!,
+    };
   }
 
   render() {
-    if (!this.props.API) {
-      return null;
-    }
     return (
       <div className="featured-card">
         <h2>{this.props.API}</h2>
@@ -40,7 +37,13 @@ export class FeaturedCard extends Component<Props> {
           className="featured-card__notes"
           placeholder="Notes"
         ></textarea>
-        <button>Add to Favorites</button>
+        <button
+          onClick={() =>
+            this.state.API && this.props.addToFavorites(this.state)
+          }
+        >
+          Add to Favorites
+        </button>
       </div>
     );
   }

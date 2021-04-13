@@ -88,9 +88,11 @@ class App extends React.Component<Props> {
             const data = this.state.apiList.find(
               (api) => api.API === match.params.title
             );
-            return (
-              <FeaturedCard {...data} addToFavorites={this.addToFavorites} />
-            );
+            if (data) {
+              return (
+                <FeaturedCard {...data} addToFavorites={this.addToFavorites} />
+              );
+            }
           }}
         />
       </div>
