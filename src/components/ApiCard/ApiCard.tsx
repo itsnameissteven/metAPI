@@ -12,8 +12,8 @@ export const ApiCard = ({API, Auth, Cors, HTTPS, Category, Description, Link}: A
         <p className="category">{Category}</p>
         <h2>{API}</h2>
         <p>{Description}</p>
-        <p>{Auth + ' Auth'}</p>
-        <p>{Cors + ' Cors'}</p>
+        <p><strong>Auth:</strong> {Auth.length ? Auth : 'No'}</p>
+        <p><strong>Cors:</strong> {Cors}</p>
         <p>{HTTPS}</p>
         <p>{Link}</p>
       </article>

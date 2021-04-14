@@ -57,6 +57,12 @@ export class FilterForm extends React.Component<FilterProps> {
     })
   }
 
+  handleAuth = (e: any):void => {
+    this.setState({ Auth: e.target.value }, () => {
+      this.props.filter(this.state)
+    })
+  }
+
   handleCatSelection = (e: any):void => {
     let selectedCategories = this.state.Categories
     if (e.target.checked) {
@@ -89,7 +95,7 @@ export class FilterForm extends React.Component<FilterProps> {
           {this.categoryOptions()}
         </div>
         <input name="search" placeholder="Search" className="search-bar" onChange={e => this.handleSearch(e)}></input>
-        <select name="Auth">
+        <select name="Auth" onChange={e => this.handleAuth(e)}>
           <option value='empty'>Select an Auth option</option>
           <option>ApiKey</option>
           <option value=''>No</option>
