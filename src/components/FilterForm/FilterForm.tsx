@@ -34,46 +34,35 @@ export class FilterForm extends React.Component<FilterProps> {
     }
   }
 
+  handleChange = (e: any):void => {
+    this.setState({ [e.target.name]: e.target.value}, () => {
+      this.props.filter(this.state)
+    })
+  }
 
-
-  // handleChange = (e: any):void => {
-  //   if (e.target.name !== 'HTTPS') {
-  //     this.setState({...this.state, [e.target.name]: e.target.value}, () => {
-  //       return this.props.filter(this.state)
-  //     })
-  //   } 
-  //   else {
-  //     let boolean: boolean;
-  //     e.target.value.includes('No')? boolean = false : boolean = true;
-  //     this.setState({...this.state, [e.target.name]: boolean}, () => {
-  //       return this.props.filter(this.state)
-  //     })    
-  //   }
+  // handleSearch = (e: any):void => {
+  //   this.setState({ search: e.target.value }, () => {
+  //     this.props.filter(this.state)
+  //   })
   // }
 
-  handleSearch = (e: any):void => {
-    this.setState({ search: e.target.value }, () => {
-      this.props.filter(this.state)
-    })
-  }
+  // handleAuth = (e: any):void => {
+  //   this.setState({ Auth: e.target.value }, () => {
+  //     this.props.filter(this.state)
+  //   })
+  // }
 
-  handleAuth = (e: any):void => {
-    this.setState({ Auth: e.target.value }, () => {
-      this.props.filter(this.state)
-    })
-  }
+  // handleHTTPS = (e: any):void => {
+  //   this.setState({ HTTPS: e.target.value}, () => {
+  //     this.props.filter(this.state)
+  //   })
+  // }
 
-  handleHTTPS = (e: any):void => {
-    this.setState({ HTTPS: e.target.value}, () => {
-      this.props.filter(this.state)
-    })
-  }
-
-  handleCors = (e: any):void => {
-    this.setState({ Cors: e.target.value }, () => {
-      this.props.filter(this.state)
-    })
-  }
+  // handleCors = (e: any):void => {
+  //   this.setState({ Cors: e.target.value }, () => {
+  //     this.props.filter(this.state)
+  //   })
+  // }
 
   handleCatSelection = (e: any):void => {
     let selectedCategories = this.state.Categories
@@ -106,19 +95,19 @@ export class FilterForm extends React.Component<FilterProps> {
         <div className = "categories">
           {this.categoryOptions()}
         </div>
-        <input name="search" placeholder="Search" className="search-bar" onChange={e => this.handleSearch(e)}></input>
-        <select name="Auth" onChange={e => this.handleAuth(e)}>
+        <input name="search" placeholder="Search" className="search-bar" onChange={e => this.handleChange(e)}></input>
+        <select name="Auth" onChange={e => this.handleChange(e)}>
           <option value='all'>--All--</option>
           <option>apiKey</option>
           <option value=''>No</option>
           <option>OAuth</option>
         </select>
-        <select name="HTTPS" onChange={e => this.handleHTTPS(e)}>
+        <select name="HTTPS" onChange={e => this.handleChange(e)}>
           <option value='all'>--All--</option>
           <option value='true'>HTTPS</option>
           <option value='false'>No HTTPS</option>
         </select>
-        <select name="Cors" onChange={e => this.handleCors(e)}>
+        <select name="Cors" onChange={e => this.handleChange(e)}>
           <option value='all'>--All--</option>
           <option value='yes'>Yes</option>
           <option value='no'>No</option>
