@@ -59,7 +59,7 @@ export class FilterForm extends React.Component<FilterProps> {
 
   categoryOptions = () => this.allCategories().map(category => {
     return (
-      <div>
+      <div key={category}>
         <input type="checkbox" id={category} name={category} onChange={e => this.handleCatSelection(e)} />
         <label htmlFor={category}>{category}</label>
       </div>
