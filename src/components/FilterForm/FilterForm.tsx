@@ -69,27 +69,37 @@ export class FilterForm extends React.Component<FilterProps> {
   render() {
     return (
       <form>
+
         <div className = "categories">
           {this.categoryOptions()}
         </div>
-        <input name="search" placeholder="Search" className="search-bar" onChange={e => this.handleChange(e)}></input>
-        <select name="Auth" onChange={e => this.handleChange(e)}>
+
+        <label htmlFor="search">Search</label>
+        <input id="search" name="search" placeholder="Search" className="search-bar" onChange={e => this.handleChange(e)}></input>
+
+        <label htmlFor="Auth">Auth:</label>
+        <select id="Auth" name="Auth" onChange={e => this.handleChange(e)}>
           <option value='all'>--All--</option>
           <option>apiKey</option>
           <option value=''>No</option>
           <option>OAuth</option>
         </select>
-        <select name="HTTPS" onChange={e => this.handleChange(e)}>
+
+        <label htmlFor="HTTPS">HTTPS:</label>
+        <select id="HTTPS" name="HTTPS" onChange={e => this.handleChange(e)}>
           <option value='all'>--All--</option>
           <option value='true'>HTTPS</option>
           <option value='false'>No HTTPS</option>
         </select>
-        <select name="Cors" onChange={e => this.handleChange(e)}>
+
+        <label htmlFor="Cors">Cors:</label>
+        <select id="Cors" name="Cors" onChange={e => this.handleChange(e)}>
           <option value='all'>--All--</option>
           <option value='yes'>Yes</option>
           <option value='no'>No</option>
           <option value='unknown'>Unknown</option>
         </select>
+
       </form>
     )
   }
