@@ -1,19 +1,26 @@
 import React from 'react'
 import {Api} from '../../apiCalls'
+import './FilterForm.css'
 
 export interface FilterState {
   search: string;
-      Categories: string;
-      Auth: string;
-      HTTPS: boolean | string;
-      Cors: string;
-  }
-
-type FilterProps = {
-  filter: any;
-  apiList: Api[];
+  Categories: string;
+  Auth: string;
+  HTTPS: boolean | string;
+  Cors: string;
 }
 
+type FilterProps = {
+  filter(state:FilterState): Api[];
+  apiList: Api[];
+}
+/**
+ * Component responsible for rendering the filter form and handling user interaction with that form
+ * 
+ * @props filter - method passed down from app to create filtered sets of ApiCards based on the search params
+ * @props apiList - whole dataset of the public apis passed down from app
+ * @returns render method returns and displays the form component
+ */
 export class FilterForm extends React.Component<FilterProps> {
   state: FilterState
   constructor(props: FilterProps) {
@@ -29,7 +36,6 @@ export class FilterForm extends React.Component<FilterProps> {
 
   handleChange = (e: any):void => {
     if (e.target.name !== 'HTTPS') {
-
       this.setState({...this.state, [e.target.name]: e.target.value}, () => {
         return this.props.filter(this.state)
       })
@@ -55,8 +61,8 @@ export class FilterForm extends React.Component<FilterProps> {
       <form
       onChange={this.handleChange}
       onSubmit={(e) => e.preventDefault()}>
-        <input name="search" placeholder="Search"></input>
-        <select name="Categories">
+        <input name="search" placeholder="Search" className="search-bar"></input>
+        <select name="Categories" className="categories">
           <option value=''>All Categories</option>
           {this.categoryOptions()}
         </select>

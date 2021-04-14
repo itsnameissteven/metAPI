@@ -1,15 +1,13 @@
-import React from "react";
-import "./App.css";
-import { getApis, Api } from "../../apiCalls";
-import { CardContainer } from "../CardContainer/CardContainer";
-import { FeaturedCard } from "../FeaturedCard/FeaturedCard";
-import { FilterForm } from "../FilterForm/FilterForm";
-import { FilterState } from "../FilterForm/FilterForm";
+import React from 'react';
+import './App.css';
+import { getApis, Api } from '../../apiCalls';
+import {CardContainer} from '../CardContainer/CardContainer';
+import {FeaturedCard} from '../FeaturedCard/FeaturedCard';
+import {FilterForm} from '../FilterForm/FilterForm';
+import { FilterState } from '../FilterForm/FilterForm';
 import { Note } from '../Note/Note';
-import { Route } from "react-router-dom";
-import { getEnabledCategories } from "node:trace_events";
-import { isCompositeComponentWithType } from "react-dom/test-utils";
-import { ApiCard } from "../ApiCard/ApiCard";
+import {Route} from 'react-router-dom';
+import { SideBar } from '../SideBar/SideBar';
 
 type Props = {};
 type Notes = {
@@ -42,15 +40,22 @@ class App extends React.Component<Props> {
     myNotes && this.setState({savedNotes: JSON.parse(myNotes)});
   }
 
-  filter = (stateObj: FilterState): any => {
+  filter = (stateObj: FilterState):Api[] => {
     let matchingCards: Api[] = [];
-    matchingCards = this.state.apiList.filter((api) => {
-      return api.API.includes(stateObj.search);
-    });
-    stateObj.Categories &&
-      (matchingCards = matchingCards.filter((api) => {
-        return api.Category === stateObj.Categories;
-      }));
+      matchingCards = this.state.apiList.filter(api => {
+      return api.API.toLowerCase().includes(stateObj.search.toLowerCase()) 
+      // || api.Description.toLowerCase().includes(stateObj.search.toLowerCase())
+    })
+      stateObj.Categories && (
+        matchingCards = matchingCards.filter(api => {
+          return api.Category === stateObj.Categories
+        }))
+      
+      stateObj.Auth !== 'Empty' && (
+        matchingCards = matchingCards.filter(api => {
+          return api.Auth.toLowerCase() === stateObj.Auth.toLowerCase();
+        })
+      )
 
     stateObj.Auth !== "Empty" &&
       (matchingCards = matchingCards.filter((api) => {
@@ -98,16 +103,11 @@ class App extends React.Component<Props> {
     this.state.savedNotes.length && localStorage.setItem('notes', JSON.stringify(this.state.savedNotes));
     return (
       <div className="App">
-        <FilterForm filter={this.filter} apiList={this.state.apiList} />
-        <Route
-          exact
-          path="/"
-          render={() => {
-            return (
-              <CardContainer apiList={this.state.currentApis}></CardContainer>
-            );
-          }}
-        />
+        <SideBar></SideBar>
+        <Route exact path='/' render={() => {
+          return <main><h1>metAPI</h1><FilterForm filter={this.filter} apiList={this.state.apiList}/>
+          <CardContainer apiList={this.state.currentApis}></CardContainer></main>
+        }}/>
         <Route
           path="/:title"
           render={({ match }) => {
@@ -116,12 +116,12 @@ class App extends React.Component<Props> {
               const myNotes = this.state.savedNotes.find(savedNote => savedNote.name === data.API)
               const savedNotes = myNotes?.notes.map(note => <Note note={note}/>)
               return (
-                <>
+                <main>
                   <FeaturedCard {...data} addToFavorites={this.addToFavorites} saveNote={this.saveNote}/>
                   <section className='saved-notes'>
                     {savedNotes}
                   </section>
-                </>
+                </main>
               );
             }
           }}

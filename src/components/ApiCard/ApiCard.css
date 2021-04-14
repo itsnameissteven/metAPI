@@ -1,0 +1,26 @@
+.api-card {
+  overflow-x: hidden;
+  text-decoration: none;
+  border-radius: 10px;
+  border: 2px solid whitesmoke;
+  text-align: left;
+  color: rgba(29, 29, 29, 0.986);
+  font-size: .5em;
+  width: 100%;
+}
+
+.api-card h2 {
+  font-weight: 800;font-size: 3em;
+  margin-left: 10px;
+}
+
+.api-card p {
+  margin-left: 10px;
+  font-size: .7em;
+}
+
+.category {
+  text-align: right;
+  font-weight: bold;
+  margin-right: 10px;
+}
