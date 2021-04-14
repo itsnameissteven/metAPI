@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Api } from "../../apiCalls";
+import { Link as HomeLink } from 'react-router-dom';
+import { BiArrowBack } from 'react-icons/bi';
 import "./FeaturedCard.css";
 
 type Props = Api & { 
@@ -33,19 +35,21 @@ export class FeaturedCard extends Component<Props> {
   }
 
   render() {
+    const {API, Auth, Cors, HTTPS, Category, Description, Link} = this.props
     return (
       <div className="featured-card">
-        <h2>{this.props.API}</h2>
-        <p>Authentication: {this.props.Auth}</p>
-        <p>Cors? {this.props.Cors}</p>
-        <p>{this.props.HTTPS}</p>
-        <p>Category: {this.props.Category}</p>
-        <p>{this.props.Description}</p>
-        <p>
-          <a href={this.props.Link} target="_blank">
+        <HomeLink to='/' className='home-link'><BiArrowBack className="home-link__arrow" />View all apis</HomeLink>
+        <h2>{API}</h2>
+        <p>{Description}</p>
+        <p><strong>Authentication:</strong> {Auth.length ? Auth : 'no'}</p>
+        <p><strong>Cors:</strong> {Cors}</p>
+        <p><strong>Https:</strong>{HTTPS}</p>
+        <p><strong>Category:</strong> {Category}</p>
+        <button>
+          <a href={Link} target="_blank">
             more details
           </a>
-        </p>
+        </button>
         <textarea
           name='note'
           value={this.state.note}
