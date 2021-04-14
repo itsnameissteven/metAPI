@@ -6,8 +6,7 @@ import {FeaturedCard} from '../FeaturedCard/FeaturedCard'
 import {FilterForm} from '../FilterForm/FilterForm'
 import { FilterState } from '../FilterForm/FilterForm'
 import {Route} from 'react-router-dom'
-import { getEnabledCategories } from 'node:trace_events';
-import { isCompositeComponentWithType } from 'react-dom/test-utils';
+import { SideBar } from '../SideBar/SideBar';
 type Props = {}
 
 class App extends React.Component<Props> {
@@ -29,10 +28,11 @@ class App extends React.Component<Props> {
     .then(data => this.setState({apiList: data.entries, currentApis: data.entries})) 
   }
 
-  filter = (stateObj: FilterState):any => {
+  filter = (stateObj: FilterState):Api[] => {
     let matchingCards: Api[] = [];
       matchingCards = this.state.apiList.filter(api => {
-      return api.API.includes(stateObj.search)
+      return api.API.toLowerCase().includes(stateObj.search.toLowerCase()) 
+      // || api.Description.toLowerCase().includes(stateObj.search.toLowerCase())
     })
       stateObj.Categories && (
         matchingCards = matchingCards.filter(api => {
@@ -65,15 +65,15 @@ class App extends React.Component<Props> {
   }
 
   render() {
-     console.log(this.state)
     return (
       <div className="App">
-        <FilterForm filter={this.filter} apiList={this.state.apiList}/>
+        <SideBar></SideBar>
         <Route exact path='/' render={() => {
-          return <CardContainer apiList={this.state.currentApis}></CardContainer>
+          return <main><h1>metAPI</h1><FilterForm filter={this.filter} apiList={this.state.apiList}/>
+          <CardContainer apiList={this.state.currentApis}></CardContainer></main>
         }}/>
       <Route path='/:title' render={({match}) => {
-        return <FeaturedCard Api={this.state.apiList.find(api => api.API === match.params.title)}/>
+        return <main><FeaturedCard Api={this.state.apiList.find(api => api.API === match.params.title)}/></main>
     }}/>
     </div>
   );

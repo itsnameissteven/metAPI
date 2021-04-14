@@ -1,0 +1,18 @@
+form {
+  display: grid;
+  grid-template: 1.2fr 1fr / repeat(4, 1fr);
+  justify-items: center;
+}
+
+.search-bar {
+  grid-area: 1 / 1 / 2 / span4;
+  width: 80%;
+  border-radius: 5px;
+  border: 1px solid
+}
+
+select {
+  margin-top: 10px;
+  height: 2.5em;
+  width: 90%;
+}

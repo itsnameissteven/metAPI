@@ -1,5 +1,15 @@
 .App {
   text-align: center;
+  display: grid;
+  grid-template: 1fr / 1fr 4fr;
+}
+
+main {
+  grid-column-start: 2;
+}
+
+h1 {
+  font-size: 5em;
 }
 
 .App-logo {
