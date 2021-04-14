@@ -4,7 +4,7 @@ import './FilterForm.css'
 
 export interface FilterState {
   search: string;
-  Categories: string;
+  Categories: string[];
   Auth: string;
   HTTPS: boolean | string;
   Cors: string;
@@ -27,26 +27,45 @@ export class FilterForm extends React.Component<FilterProps> {
     super(props)
     this.state = {
       search: '',
-      Categories: '',
+      Categories: [],
       Auth: 'Empty',
       HTTPS: '',
       Cors: '',
     }
   }
 
-  handleChange = (e: any):void => {
-    if (e.target.name !== 'HTTPS') {
-      this.setState({...this.state, [e.target.name]: e.target.value}, () => {
-        return this.props.filter(this.state)
-      })
-    } 
-    else {
-      let boolean: boolean;
-      e.target.value.includes('No')? boolean = false : boolean = true;
-      this.setState({...this.state, [e.target.name]: boolean}, () => {
-        return this.props.filter(this.state)
-      })    
+
+
+  // handleChange = (e: any):void => {
+  //   if (e.target.name !== 'HTTPS') {
+  //     this.setState({...this.state, [e.target.name]: e.target.value}, () => {
+  //       return this.props.filter(this.state)
+  //     })
+  //   } 
+  //   else {
+  //     let boolean: boolean;
+  //     e.target.value.includes('No')? boolean = false : boolean = true;
+  //     this.setState({...this.state, [e.target.name]: boolean}, () => {
+  //       return this.props.filter(this.state)
+  //     })    
+  //   }
+  // }
+
+  handleSearch = (e: any):void => {
+    this.setState({ search: e.target.value }, () => {
+      this.props.filter(this.state)
+    })
+  }
+
+  handleCatSelection = (e: any):void => {
+    let selectedCategories = this.state.Categories
+    if (e.target.checked) {
+      selectedCategories.push(e.target.name)
+      this.setState({ Categories: selectedCategories })
+    } else {
+      selectedCategories.splice(selectedCategories.indexOf(e.target.name))
     }
+    this.props.filter(this.state)
   }
 
   allCategories = ():string[] => this.props.apiList.reduce((categories: string[], {Category}) => {
@@ -54,18 +73,22 @@ export class FilterForm extends React.Component<FilterProps> {
     return categories
   }, []);
 
-  categoryOptions = () => this.allCategories().map(category => <option>{category}</option>)
+  categoryOptions = () => this.allCategories().map(category => {
+    return (
+      <div>
+        <input type="checkbox" id={category} name={category} onChange={e => this.handleCatSelection(e)} />
+        <label htmlFor={category}>{category}</label>
+      </div>
+    )
+  })
 
   render() {
     return (
-      <form
-      onChange={this.handleChange}
-      onSubmit={(e) => e.preventDefault()}>
-        <input name="search" placeholder="Search" className="search-bar"></input>
-        <select name="Categories" className="categories">
-          <option value=''>All Categories</option>
+      <form>
+        <div className = "categories">
           {this.categoryOptions()}
-        </select>
+        </div>
+        <input name="search" placeholder="Search" className="search-bar" onChange={e => this.handleSearch(e)}></input>
         <select name="Auth">
           <option value='empty'>Select an Auth option</option>
           <option>ApiKey</option>

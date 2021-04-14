@@ -46,9 +46,9 @@ class App extends React.Component<Props> {
       return api.API.toLowerCase().includes(stateObj.search.toLowerCase()) 
       // || api.Description.toLowerCase().includes(stateObj.search.toLowerCase())
     })
-      stateObj.Categories && (
+      stateObj.Categories.length && (
         matchingCards = matchingCards.filter(api => {
-          return api.Category === stateObj.Categories
+          return stateObj.Categories.includes(api.Category)
         }))
       
       stateObj.Auth !== 'Empty' && (
