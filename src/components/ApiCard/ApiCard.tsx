@@ -18,5 +18,5 @@ export const ApiCard = ({API, Auth, Cors, HTTPS, Category, Description, Link}: A
         <p>{Link}</p>
       </article>
     </CardLink>
-    )
+  )
 }

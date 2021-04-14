@@ -40,42 +40,57 @@ class App extends React.Component<Props> {
     myNotes && this.setState({savedNotes: JSON.parse(myNotes)});
   }
 
-  filter = (stateObj: FilterState):Api[] => {
-    let matchingCards: Api[] = [];
-      matchingCards = this.state.apiList.filter(api => {
-      return api.API.toLowerCase().includes(stateObj.search.toLowerCase()) 
-      // || api.Description.toLowerCase().includes(stateObj.search.toLowerCase())
-    })
-      stateObj.Categories.length && (
-        matchingCards = matchingCards.filter(api => {
-          return stateObj.Categories.includes(api.Category)
-        }))
-      
-      stateObj.Auth !== 'Empty' && (
-        matchingCards = matchingCards.filter(api => {
-          return api.Auth.toLowerCase() === stateObj.Auth.toLowerCase();
-        })
-      )
+  filterByCategory = (matchedCards: Api[], stateObj: FilterState) => {
+    if (stateObj.Categories.length) {
+      return matchedCards.filter(api => stateObj.Categories.includes(api.Category))
+    } else {
+      return matchedCards
+    }
+  }
 
-    stateObj.Auth !== "Empty" &&
-      (matchingCards = matchingCards.filter((api) => {
-        return api.Auth.toLowerCase() === stateObj.Auth.toLowerCase();
-      }));
+  filterBySearch = (matchedCards: Api[], stateObj: FilterState) => {
+    if (stateObj.search.length) {
+      return matchedCards.filter(api => api.API.toLowerCase().includes(stateObj.search.toLowerCase()))
+    } else {
+      return matchedCards
+    }
+  }
 
-    stateObj.HTTPS !== "" &&
-      (matchingCards = matchingCards.filter((api) => {
-        return api.HTTPS === stateObj.HTTPS;
-      }));
+  filterByAuth = (matchedCards: Api[], stateObj: FilterState) => {
+    if (stateObj.Auth !== 'all') {
+      return matchedCards.filter(api => api.Auth === stateObj.Auth)
+    } else {
+      return matchedCards
+    }
+  }
 
-    stateObj.Cors !== "" &&
-      (matchingCards = matchingCards.filter((api) => {
-        return api.Cors.toLowerCase() === stateObj.Cors.toLowerCase();
-      }));
+  filterByHTTPS = (matchedCards: Api[], stateObj: FilterState) => {
+    console.log(stateObj)
+    if (stateObj.HTTPS !== 'all') {
+      return matchedCards.filter(api => api.HTTPS === stateObj.HTTPS)
+    } else {
+      return matchedCards
+    }
+  }
 
-    if (matchingCards.length) {
-      this.setState({ ...this.state, currentApis: matchingCards });
-      return matchingCards;
-    } else return this.state.apiList;
+  filterByCors = (matchedCards: Api[], stateObj: FilterState) => {
+    if (stateObj.Cors !== 'all') {
+      return matchedCards.filter(api => api.Cors === stateObj.Cors)
+    } else {
+      return matchedCards
+    }
+  }
+
+  filter = (stateObj: FilterState): Api[] => {
+    console.log(stateObj)
+    let matchedCards = this.state.apiList
+    matchedCards = this.filterByCategory(matchedCards, stateObj)
+    matchedCards = this.filterBySearch(matchedCards, stateObj)
+    matchedCards = this.filterByAuth(matchedCards, stateObj)
+    matchedCards = this.filterByHTTPS(matchedCards, stateObj)
+    matchedCards = this.filterByCors(matchedCards, stateObj)
+    this.setState({ currentApis: matchedCards })
+    return matchedCards
   };
 
   addToFavorites = (ApiCard: Api) => {

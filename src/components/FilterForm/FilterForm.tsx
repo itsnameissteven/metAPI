@@ -28,9 +28,9 @@ export class FilterForm extends React.Component<FilterProps> {
     this.state = {
       search: '',
       Categories: [],
-      Auth: 'Empty',
-      HTTPS: '',
-      Cors: '',
+      Auth: 'all',
+      HTTPS: 'all',
+      Cors: 'all',
     }
   }
 
@@ -96,18 +96,18 @@ export class FilterForm extends React.Component<FilterProps> {
         </div>
         <input name="search" placeholder="Search" className="search-bar" onChange={e => this.handleSearch(e)}></input>
         <select name="Auth" onChange={e => this.handleAuth(e)}>
-          <option value='empty'>Select an Auth option</option>
-          <option>ApiKey</option>
+          <option value='all'>--All--</option>
+          <option>apiKey</option>
           <option value=''>No</option>
           <option>OAuth</option>
         </select>
         <select name="HTTPS">
-          <option value=''>Select an HTTPS Option</option>
+          <option value='all'>--All--</option>
           <option>HTTPS</option>
           <option>No HTTPS</option>
         </select>
         <select name="Cors">
-          <option value=''>Select a Cors option</option>
+          <option value='all'>--All--</option>
           <option>Yes</option>
           <option>No</option>
           <option>Unknown</option>
