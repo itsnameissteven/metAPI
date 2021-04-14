@@ -40,39 +40,16 @@ export class FilterForm extends React.Component<FilterProps> {
     })
   }
 
-  // handleSearch = (e: any):void => {
-  //   this.setState({ search: e.target.value }, () => {
-  //     this.props.filter(this.state)
-  //   })
-  // }
-
-  // handleAuth = (e: any):void => {
-  //   this.setState({ Auth: e.target.value }, () => {
-  //     this.props.filter(this.state)
-  //   })
-  // }
-
-  // handleHTTPS = (e: any):void => {
-  //   this.setState({ HTTPS: e.target.value}, () => {
-  //     this.props.filter(this.state)
-  //   })
-  // }
-
-  // handleCors = (e: any):void => {
-  //   this.setState({ Cors: e.target.value }, () => {
-  //     this.props.filter(this.state)
-  //   })
-  // }
-
   handleCatSelection = (e: any):void => {
     let selectedCategories = this.state.Categories
     if (e.target.checked) {
       selectedCategories.push(e.target.name)
-      this.setState({ Categories: selectedCategories })
     } else {
-      selectedCategories.splice(selectedCategories.indexOf(e.target.name))
+      selectedCategories.splice(selectedCategories.indexOf(e.target.name), 1)
     }
-    this.props.filter(this.state)
+    this.setState({ Categories: selectedCategories }, () => {
+      this.props.filter(this.state)
+    })
   }
 
   allCategories = ():string[] => this.props.apiList.reduce((categories: string[], {Category}) => {

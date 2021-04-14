@@ -41,6 +41,7 @@ class App extends React.Component<Props> {
   }
 
   filterByCategory = (matchedCards: Api[], stateObj: FilterState) => {
+    console.log(stateObj)
     if (stateObj.Categories.length) {
       return matchedCards.filter(api => stateObj.Categories.includes(api.Category))
     } else {
