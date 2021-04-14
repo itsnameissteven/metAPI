@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import { Api } from "../../apiCalls";
 import { Link as HomeLink } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
+import { MdFavorite } from 'react-icons/md'
 import "./FeaturedCard.css";
 
 type Props = Api & { 
-  addToFavorites: (ApiCard: Api) => void, 
-  saveNote: (ApiName: string, note: string) => void 
+  toggleFavorite: (ApiCard: Api) => void, 
+  saveNote: (ApiName: string, note: string) => void, 
+  favorites: Api[]
 };
 
 export class FeaturedCard extends Component<Props> {
@@ -23,6 +25,11 @@ export class FeaturedCard extends Component<Props> {
       Category: props.Category,
       note: ''
     };
+  }
+
+  returnClassName = () => {
+    const isFavorited = this.props.favorites.some(favorite => favorite.API === this.state.API)
+    return isFavorited ? 'favorite-btn__heart--favorited' : 'favorite-btn__heart'
   }
 
   handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -45,9 +52,9 @@ export class FeaturedCard extends Component<Props> {
         <p><strong>Cors:</strong> {Cors}</p>
         <p><strong>Https:</strong>{HTTPS}</p>
         <p><strong>Category:</strong> {Category}</p>
-        <button>
-          <a href={Link} target="_blank">
-            more details
+        <button className="external-link__btn">
+          <a href={Link} target="_blank" className="external-link">
+            Visit Website
           </a>
         </button>
         <textarea
@@ -59,11 +66,10 @@ export class FeaturedCard extends Component<Props> {
         />
         <button onClick={this.saveCurrentNote}>Save Notes</button>
         <button
-          onClick={() =>
-            this.state.API && this.props.addToFavorites(this.state)
-          }
+          className="favorite-btn" 
+          onClick={() =>this.props.toggleFavorite(this.state)}
         >
-          Add to Favorites
+          <MdFavorite className={this.returnClassName()}/>
         </button>
       </div>
     );

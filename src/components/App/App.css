@@ -51,9 +51,19 @@ h1 {
 }
 
 .saved-notes {
-  margin-top: 100px;
+  padding: 10px 0;
   float: right;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
+  border-left: 2px solid black;
+  height: 100vh;
+  width: 400px;
+}
+
+.saved-notes h3 {
+  width: 100%;
+  border-bottom: 1px solid black;
+  padding-bottom: 20px;
+  font-size: 30px;
 }

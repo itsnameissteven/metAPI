@@ -1,11 +1,13 @@
 .featured-card {
   position: relative;
+  float: left;
   display: inline-block;
-  margin: 100px auto;
+  margin: 100px 0 0 100px;
   width: 400px;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   border-radius: 6px;
   padding: 20px;
+  box-shadow: -1px 3px 9px 1px rgba(0, 0, 0, 0.226);
 }
 
 .featured-card__notes {
@@ -37,4 +39,49 @@
 .home-link__arrow {
   vertical-align: bottom;
   font-size: 20px;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  outline-color: black;
+}
+
+.favorite-btn__heart {
+  vertical-align: middle;
+  font-size: 25px;
+  fill: rgb(161, 167, 167);
+  transition: all 200ms ease-in;
+}
+
+.favorite-btn__heart--favorited {
+  vertical-align: middle;
+  font-size: 25px;
+  fill: rgb(228, 6, 6);
+  transition: all 200ms ease-in;
+}
+
+.favorite-btn__heart:hover,
+.favorite-btn__heart--favorited:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.external-link__btn {
+  background-color: transparent;
+  padding: 8px 20px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  border-radius: 4px;
+  color: black;
+}
+
+.external-link {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
 }
