@@ -35,13 +35,11 @@ class App extends React.Component<Props> {
   }
 
   componentDidMount() {
-    getApis().then((data) =>
-      this.setState({ apiList: data.entries, currentApis: data.entries })
-    );
+    getApis().then((data) => this.setState({ apiList: data.entries, currentApis: data.entries }));
     const myFavorites = localStorage.getItem('favorites');
-    if(myFavorites) {
-      this.setState({favorites: JSON.parse(myFavorites)})
-    }
+    const myNotes = localStorage.getItem('notes');
+    myFavorites && this.setState({favorites: JSON.parse(myFavorites)});
+    myNotes && this.setState({savedNotes: JSON.parse(myNotes)});
   }
 
   filter = (stateObj: FilterState): any => {
@@ -76,39 +74,28 @@ class App extends React.Component<Props> {
   };
 
   addToFavorites = (ApiCard: Api) => {
-    const APIIsSaved = this.state.favorites.some((element) => element.API === ApiCard.API);
-    // if(!validate) this.setState({ favorites: [...this.state.favorites, ApiCard] });
-    const myFavorites = localStorage.getItem("favorites");
-    if(!APIIsSaved && myFavorites) {
-      const parsedFavorites = JSON.parse(myFavorites);
-      parsedFavorites.push(ApiCard);
-      localStorage.setItem("favorites", JSON.stringify(parsedFavorites))
-      this.setState({favorites: JSON.parse(localStorage.getItem("favorites")!)})
-    } else if (!APIIsSaved && !myFavorites) {
-      localStorage.setItem("favorites", JSON.stringify([ApiCard]))
-      this.setState({favorites: JSON.parse(localStorage.getItem("favorites")!)})
-    }
-    
+    const alreadySaved = this.state.favorites.some((element) => element.API === ApiCard.API);
+    !alreadySaved && this.setState({ favorites: [...this.state.favorites, ApiCard] });
   };
 
   saveNote = (ApiName: string, note: string) => {
     if(!note) return null;
-    const hasSavedNotes = this.state.savedNotes.some(note => note.name === ApiName)
+    const hasSavedNotes = this.state.savedNotes.some(note => note.name === ApiName);
     if(hasSavedNotes) {
       const updatedNotes = this.state.savedNotes.map( savedNote => {
         if(savedNote.name === ApiName) {
-          savedNote.notes.push(note)
+          savedNote.notes.push(note);
         }
-        return savedNote
-      })
-      return this.setState({ savedNotes: updatedNotes})
+        return savedNote;
+      });
+      return this.setState({ savedNotes: updatedNotes});
     } 
-
-    this.setState({ savedNotes: [...this.state.savedNotes, {name: ApiName, notes: [note]}]})
-
+    this.setState({ savedNotes: [...this.state.savedNotes, {name: ApiName, notes: [note]}]});
   }
 
   render() {
+    this.state.favorites.length && localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
+    this.state.savedNotes.length && localStorage.setItem('notes', JSON.stringify(this.state.savedNotes));
     return (
       <div className="App">
         <FilterForm filter={this.filter} apiList={this.state.apiList} />
