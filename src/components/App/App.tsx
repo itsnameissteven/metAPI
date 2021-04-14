@@ -116,6 +116,13 @@ class App extends React.Component<Props> {
     this.setState({ savedNotes: [...this.state.savedNotes, {name: ApiName, notes: [note]}]});
   }
 
+  deleteNote = (apiName: string, content: string) => {
+    const myNote = this.state.savedNotes.find(note => note.name === apiName)
+    const unEditedNotes = this.state.savedNotes.filter(note => note !== myNote)
+    myNote?.notes.splice(myNote.notes.indexOf(content), 1)
+    this.setState({ savedNotes: [...unEditedNotes, myNote]})
+  }
+
   render() {
     this.state.favorites.length && localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
     this.state.savedNotes.length && localStorage.setItem('notes', JSON.stringify(this.state.savedNotes));
@@ -132,7 +139,7 @@ class App extends React.Component<Props> {
             const data = this.state.apiList.find((api) => api.API === match.params.title);
             if (data) {
               const myNotes = this.state.savedNotes.find(savedNote => savedNote.name === data.API)
-              const savedNotes = myNotes?.notes.map((note, index) => <Note note={note} key={index} />)
+              const savedNotes = myNotes?.notes.map((note, index) => <Note note={note} key={index} apiName={myNotes.name} deleteNote={this.deleteNote} />)
               return (
                 <main>
                   <FeaturedCard {...data} toggleFavorite={this.toggleFavorite} saveNote={this.saveNote} favorites={this.state.favorites} />
