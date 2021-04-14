@@ -38,6 +38,10 @@ class App extends React.Component<Props> {
     getApis().then((data) =>
       this.setState({ apiList: data.entries, currentApis: data.entries })
     );
+    const myFavorites = localStorage.getItem('favorites');
+    if(myFavorites) {
+      this.setState({favorites: JSON.parse(myFavorites)})
+    }
   }
 
   filter = (stateObj: FilterState): any => {
@@ -72,8 +76,19 @@ class App extends React.Component<Props> {
   };
 
   addToFavorites = (ApiCard: Api) => {
-    const validate = this.state.favorites.some((element) => element.API === ApiCard.API);
-    !validate && this.setState({ favorites: [...this.state.favorites, ApiCard] });
+    const APIIsSaved = this.state.favorites.some((element) => element.API === ApiCard.API);
+    // if(!validate) this.setState({ favorites: [...this.state.favorites, ApiCard] });
+    const myFavorites = localStorage.getItem("favorites");
+    if(!APIIsSaved && myFavorites) {
+      const parsedFavorites = JSON.parse(myFavorites);
+      parsedFavorites.push(ApiCard);
+      localStorage.setItem("favorites", JSON.stringify(parsedFavorites))
+      this.setState({favorites: JSON.parse(localStorage.getItem("favorites")!)})
+    } else if (!APIIsSaved && !myFavorites) {
+      localStorage.setItem("favorites", JSON.stringify([ApiCard]))
+      this.setState({favorites: JSON.parse(localStorage.getItem("favorites")!)})
+    }
+    
   };
 
   saveNote = (ApiName: string, note: string) => {
@@ -89,10 +104,7 @@ class App extends React.Component<Props> {
       return this.setState({ savedNotes: updatedNotes})
     } 
 
-    this.setState({ savedNotes: [...this.state.savedNotes, {
-      name: ApiName,
-      notes: [note]
-    }]})
+    this.setState({ savedNotes: [...this.state.savedNotes, {name: ApiName, notes: [note]}]})
 
   }
 
