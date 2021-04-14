@@ -13,17 +13,16 @@
 .note__details {
   margin: 0;
   text-align: left;
-
-  /* display: inline; */
 }
 
 .delete-btn {
+  margin: 0 -10px -10px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 30px;
   width: 30px;
-  font-size: 25px;
+  font-size: 22px;
   background: transparent;
   border: none;
   align-self: flex-end;
@@ -31,9 +30,13 @@
 }
 
 .delete-btn:focus {
-  border: 2px solid blue;
+  border: 1px solid rgb(7, 7, 7);
 }
 
 .trash-icon {
   flex-shrink: 0;
+  transition: all 200ms ease-in;
+}
+.trash-icon:hover {
+  color: rgb(99, 99, 99);
 }

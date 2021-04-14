@@ -139,10 +139,17 @@ class App extends React.Component<Props> {
             const data = this.state.apiList.find((api) => api.API === match.params.title);
             if (data) {
               const myNotes = this.state.savedNotes.find(savedNote => savedNote.name === data.API)
-              const savedNotes = myNotes?.notes.map((note, index) => <Note note={note} key={index} apiName={myNotes.name} deleteNote={this.deleteNote} />)
+              const savedNotes = myNotes?.notes.map((note, index) => {
+                return <Note note={note} key={index} apiName={myNotes.name} deleteNote={this.deleteNote} />
+              })
               return (
                 <main>
-                  <FeaturedCard {...data} toggleFavorite={this.toggleFavorite} saveNote={this.saveNote} favorites={this.state.favorites} />
+                  <FeaturedCard 
+                    {...data} 
+                    toggleFavorite={this.toggleFavorite} 
+                    saveNote={this.saveNote} 
+                    favorites={this.state.favorites} 
+                  />
                   <section className='saved-notes'>
                     <h3>Notes</h3>
                     {savedNotes}

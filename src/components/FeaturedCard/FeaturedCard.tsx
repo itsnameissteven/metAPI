@@ -46,13 +46,19 @@ export class FeaturedCard extends Component<Props> {
     return (
       <div className="featured-card">
         <HomeLink to='/' className='home-link'><BiArrowBack className="home-link__arrow" />View all apis</HomeLink>
+        <button
+          className="favorite-btn" 
+          onClick={() =>this.props.toggleFavorite(this.state)}
+        >
+          <MdFavorite className={this.returnClassName()}/>
+        </button>
         <h2>{API}</h2>
         <p>{Description}</p>
         <p><strong>Authentication:</strong> {Auth.length ? Auth : 'no'}</p>
         <p><strong>Cors:</strong> {Cors}</p>
         <p><strong>Https:</strong>{HTTPS}</p>
         <p><strong>Category:</strong> {Category}</p>
-        <button className="external-link__btn">
+        <button className="featured-card__btn">
           <a href={Link} target="_blank" className="external-link">
             Visit Website
           </a>
@@ -64,13 +70,7 @@ export class FeaturedCard extends Component<Props> {
           placeholder="Notes"
           onChange={this.handleChange}
         />
-        <button onClick={this.saveCurrentNote}>Save Notes</button>
-        <button
-          className="favorite-btn" 
-          onClick={() =>this.props.toggleFavorite(this.state)}
-        >
-          <MdFavorite className={this.returnClassName()}/>
-        </button>
+        <button onClick={this.saveCurrentNote} className="featured-card__btn save-note__btn">Save Note</button>
       </div>
     );
   }
