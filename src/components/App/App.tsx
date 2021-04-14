@@ -103,7 +103,7 @@ class App extends React.Component<Props> {
     this.state.savedNotes.length && localStorage.setItem('notes', JSON.stringify(this.state.savedNotes));
     return (
       <div className="App">
-        <SideBar></SideBar>
+        <SideBar apiList={this.state.favorites}></SideBar>
         <Route exact path='/' render={() => {
           return <main><h1>metAPI</h1><FilterForm filter={this.filter} apiList={this.state.apiList}/>
           <CardContainer apiList={this.state.currentApis}></CardContainer></main>
