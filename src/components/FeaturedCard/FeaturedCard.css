@@ -1,4 +1,5 @@
 .featured-card {
+  display: inline-block;
   margin: 100px auto;
   width: 30%;
   border: 2px solid black;

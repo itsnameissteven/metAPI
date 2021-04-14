@@ -1,4 +1,5 @@
 import React from 'react';
+import './Note.css'
 
 type Note = {
   note: string
@@ -6,6 +7,8 @@ type Note = {
 
 export const Note = ({note}: Note) => {
   return (
-    <p> {note}</p>
+    <article className="note">
+      <p className='note__details'> {note}</p>
+    </article>
   )
 }

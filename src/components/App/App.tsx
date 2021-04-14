@@ -118,7 +118,9 @@ class App extends React.Component<Props> {
               return (
                 <>
                   <FeaturedCard {...data} addToFavorites={this.addToFavorites} saveNote={this.saveNote}/>
-                  {savedNotes}
+                  <section className='saved-notes'>
+                    {savedNotes}
+                  </section>
                 </>
               );
             }
