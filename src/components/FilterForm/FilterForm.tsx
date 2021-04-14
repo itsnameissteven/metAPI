@@ -4,9 +4,9 @@ import './FilterForm.css'
 
 export interface FilterState {
   search: string;
-  Categories: string;
+  Categories: string[];
   Auth: string;
-  HTTPS: boolean | string;
+  HTTPS: string;
   Cors: string;
 }
 
@@ -27,26 +27,29 @@ export class FilterForm extends React.Component<FilterProps> {
     super(props)
     this.state = {
       search: '',
-      Categories: '',
-      Auth: 'Empty',
-      HTTPS: '',
-      Cors: '',
+      Categories: [],
+      Auth: 'all',
+      HTTPS: 'all',
+      Cors: 'all',
     }
   }
 
   handleChange = (e: any):void => {
-    if (e.target.name !== 'HTTPS') {
-      this.setState({...this.state, [e.target.name]: e.target.value}, () => {
-        return this.props.filter(this.state)
-      })
-    } 
-    else {
-      let boolean: boolean;
-      e.target.value.includes('No')? boolean = false : boolean = true;
-      this.setState({...this.state, [e.target.name]: boolean}, () => {
-        return this.props.filter(this.state)
-      })    
+    this.setState({ [e.target.name]: e.target.value}, () => {
+      this.props.filter(this.state)
+    })
+  }
+
+  handleCatSelection = (e: any):void => {
+    let selectedCategories = this.state.Categories
+    if (e.target.checked) {
+      selectedCategories.push(e.target.name)
+    } else {
+      selectedCategories.splice(selectedCategories.indexOf(e.target.name), 1)
     }
+    this.setState({ Categories: selectedCategories }, () => {
+      this.props.filter(this.state)
+    })
   }
 
   allCategories = ():string[] => this.props.apiList.reduce((categories: string[], {Category}) => {
@@ -54,35 +57,49 @@ export class FilterForm extends React.Component<FilterProps> {
     return categories
   }, []);
 
-  categoryOptions = () => this.allCategories().map(category => <option>{category}</option>)
+  categoryOptions = () => this.allCategories().map(category => {
+    return (
+      <div key={category}>
+        <input type="checkbox" id={category} name={category} onChange={e => this.handleCatSelection(e)} />
+        <label htmlFor={category}>{category}</label>
+      </div>
+    )
+  })
 
   render() {
     return (
-      <form
-      onChange={this.handleChange}
-      onSubmit={(e) => e.preventDefault()}>
-        <input name="search" placeholder="Search" className="search-bar"></input>
-        <select name="Categories" className="categories">
-          <option value=''>All Categories</option>
+      <form>
+
+        <div className = "categories">
           {this.categoryOptions()}
-        </select>
-        <select name="Auth">
-          <option value='empty'>Select an Auth option</option>
-          <option>ApiKey</option>
+        </div>
+
+        <label htmlFor="search">Search</label>
+        <input id="search" name="search" placeholder="Search" className="search-bar" onChange={e => this.handleChange(e)}></input>
+
+        <label htmlFor="Auth">Auth:</label>
+        <select id="Auth" name="Auth" onChange={e => this.handleChange(e)}>
+          <option value='all'>--All--</option>
+          <option>apiKey</option>
           <option value=''>No</option>
           <option>OAuth</option>
         </select>
-        <select name="HTTPS">
-          <option value=''>Select an HTTPS Option</option>
-          <option>HTTPS</option>
-          <option>No HTTPS</option>
+
+        <label htmlFor="HTTPS">HTTPS:</label>
+        <select id="HTTPS" name="HTTPS" onChange={e => this.handleChange(e)}>
+          <option value='all'>--All--</option>
+          <option value='true'>HTTPS</option>
+          <option value='false'>No HTTPS</option>
         </select>
-        <select name="Cors">
-          <option value=''>Select a Cors option</option>
-          <option>Yes</option>
-          <option>No</option>
-          <option>Unknown</option>
+
+        <label htmlFor="Cors">Cors:</label>
+        <select id="Cors" name="Cors" onChange={e => this.handleChange(e)}>
+          <option value='all'>--All--</option>
+          <option value='yes'>Yes</option>
+          <option value='no'>No</option>
+          <option value='unknown'>Unknown</option>
         </select>
+
       </form>
     )
   }
