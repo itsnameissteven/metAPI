@@ -1,7 +1,7 @@
-const baseUrl = 'https://api.publicapis.org/'
+const baseUrl = "https://api.publicapis.org/";
 
 export interface Api {
-  API : string;
+  API: string;
   Description: string;
   Auth: string;
   HTTPS: boolean;
@@ -10,8 +10,6 @@ export interface Api {
   Category: string;
 }
 
-
 export function getApis(): Promise<Api[]> {
-  return fetch(baseUrl + 'entries')
-  .then(res => res.json())
+  return fetch(baseUrl + "entries").then((res) => res.json());
 }
