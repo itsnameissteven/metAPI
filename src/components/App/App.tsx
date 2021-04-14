@@ -65,9 +65,8 @@ class App extends React.Component<Props> {
   }
 
   filterByHTTPS = (matchedCards: Api[], stateObj: FilterState) => {
-    console.log(stateObj)
     if (stateObj.HTTPS !== 'all') {
-      return matchedCards.filter(api => api.HTTPS === stateObj.HTTPS)
+      return matchedCards.filter(api => stateObj.HTTPS === 'true' ? api.HTTPS === true : api.HTTPS === false)
     } else {
       return matchedCards
     }
@@ -82,7 +81,6 @@ class App extends React.Component<Props> {
   }
 
   filter = (stateObj: FilterState): Api[] => {
-    console.log(stateObj)
     let matchedCards = this.state.apiList
     matchedCards = this.filterByCategory(matchedCards, stateObj)
     matchedCards = this.filterBySearch(matchedCards, stateObj)

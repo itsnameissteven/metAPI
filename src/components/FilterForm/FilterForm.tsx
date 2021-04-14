@@ -6,7 +6,7 @@ export interface FilterState {
   search: string;
   Categories: string[];
   Auth: string;
-  HTTPS: boolean | string;
+  HTTPS: string;
   Cors: string;
 }
 
@@ -63,6 +63,18 @@ export class FilterForm extends React.Component<FilterProps> {
     })
   }
 
+  handleHTTPS = (e: any):void => {
+    this.setState({ HTTPS: e.target.value}, () => {
+      this.props.filter(this.state)
+    })
+  }
+
+  handleCors = (e: any):void => {
+    this.setState({ Cors: e.target.value }, () => {
+      this.props.filter(this.state)
+    })
+  }
+
   handleCatSelection = (e: any):void => {
     let selectedCategories = this.state.Categories
     if (e.target.checked) {
@@ -101,16 +113,16 @@ export class FilterForm extends React.Component<FilterProps> {
           <option value=''>No</option>
           <option>OAuth</option>
         </select>
-        <select name="HTTPS">
+        <select name="HTTPS" onChange={e => this.handleHTTPS(e)}>
           <option value='all'>--All--</option>
-          <option>HTTPS</option>
-          <option>No HTTPS</option>
+          <option value='true'>HTTPS</option>
+          <option value='false'>No HTTPS</option>
         </select>
-        <select name="Cors">
+        <select name="Cors" onChange={e => this.handleCors(e)}>
           <option value='all'>--All--</option>
-          <option>Yes</option>
-          <option>No</option>
-          <option>Unknown</option>
+          <option value='yes'>Yes</option>
+          <option value='no'>No</option>
+          <option value='unknown'>Unknown</option>
         </select>
       </form>
     )
