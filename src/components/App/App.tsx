@@ -8,6 +8,7 @@ import { FilterState } from '../FilterForm/FilterForm';
 import { Note } from '../Note/Note';
 import {Route} from 'react-router-dom';
 import { SideBar } from '../SideBar/SideBar';
+import { filterByCategory, filterByAuth, filterBySearch, filterByHTTPS, filterByCors } from '../../filterMethods'
 
 type Props = {};
 type Notes = {
@@ -40,53 +41,13 @@ class App extends React.Component<Props> {
     myNotes && this.setState({savedNotes: JSON.parse(myNotes)});
   }
 
-  filterByCategory = (matchedCards: Api[], stateObj: FilterState) => {
-    if (stateObj.Categories.length) {
-      return matchedCards.filter(api => stateObj.Categories.includes(api.Category))
-    } else {
-      return matchedCards
-    }
-  }
-
-  filterBySearch = (matchedCards: Api[], stateObj: FilterState) => {
-    if (stateObj.search.length) {
-      return matchedCards.filter(api => api.API.toLowerCase().includes(stateObj.search.toLowerCase()))
-    } else {
-      return matchedCards
-    }
-  }
-
-  filterByAuth = (matchedCards: Api[], stateObj: FilterState) => {
-    if (stateObj.Auth !== 'all') {
-      return matchedCards.filter(api => api.Auth === stateObj.Auth)
-    } else {
-      return matchedCards
-    }
-  }
-
-  filterByHTTPS = (matchedCards: Api[], stateObj: FilterState) => {
-    if (stateObj.HTTPS !== 'all') {
-      return matchedCards.filter(api => stateObj.HTTPS === 'true' ? api.HTTPS === true : api.HTTPS === false)
-    } else {
-      return matchedCards
-    }
-  }
-
-  filterByCors = (matchedCards: Api[], stateObj: FilterState) => {
-    if (stateObj.Cors !== 'all') {
-      return matchedCards.filter(api => api.Cors === stateObj.Cors)
-    } else {
-      return matchedCards
-    }
-  }
-
   filter = (stateObj: FilterState): Api[] => {
     let matchedCards = this.state.apiList
-    matchedCards = this.filterByCategory(matchedCards, stateObj)
-    matchedCards = this.filterBySearch(matchedCards, stateObj)
-    matchedCards = this.filterByAuth(matchedCards, stateObj)
-    matchedCards = this.filterByHTTPS(matchedCards, stateObj)
-    matchedCards = this.filterByCors(matchedCards, stateObj)
+    matchedCards = filterByCategory(matchedCards, stateObj)
+    matchedCards = filterBySearch(matchedCards, stateObj)
+    matchedCards = filterByAuth(matchedCards, stateObj)
+    matchedCards = filterByHTTPS(matchedCards, stateObj)
+    matchedCards = filterByCors(matchedCards, stateObj)
     this.setState({ currentApis: matchedCards })
     return matchedCards
   };
