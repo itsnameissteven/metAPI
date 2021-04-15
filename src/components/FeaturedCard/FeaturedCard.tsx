@@ -3,7 +3,6 @@ import { Api } from "../../apiCalls";
 import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
 import { Link as HomeLink } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
-import { MdFavorite } from 'react-icons/md'
 import "./FeaturedCard.css";
 
 type Props = Api & { 
@@ -64,13 +63,13 @@ export class FeaturedCard extends Component<Props> {
         <p><strong>Https:</strong>{HTTPS}</p>
         <p><strong>Category:</strong> {Category}</p>
         <button className="featured-card__btn">
-          <a href={Link} target="_blank" className="external-link">
+          <a href={Link} target="_blank" className="external-link" rel="noreferrer">
             Visit Website
           </a>
         </button>
         <textarea
           name='note'
-          value={this.state.note}
+          value={note}
           className="featured-card__notes"
           placeholder="Notes"
           onChange={this.handleChange}
