@@ -20,7 +20,7 @@ export const ApiCard = ({apiData, toggleFavorite, favorites}: ApiCardProps) => {
           favorites={favorites}
         />
       </div>
-      <CardLink to={'/' + API} className="api-card-link">
+      <CardLink to={'/api/' + API} className="api-card-link">
         <article>
           <p className="category">{Category}</p>
           <h2>{API}</h2>

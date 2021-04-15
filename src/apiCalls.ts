@@ -11,5 +11,13 @@ export interface Api {
 }
 
 export function getApis(): Promise<Api[]> {
-  return fetch(baseUrl + "entries").then((res) => res.json());
+  return fetch(baseUrl + "entries").then(checkForErrors);
+}
+
+const checkForErrors = (response: Response) => {
+  if(!response.ok) {
+    throw new Error(`${response.status}`)
+  } else {
+    return response.json()
+  }
 }
