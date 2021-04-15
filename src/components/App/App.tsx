@@ -8,11 +8,7 @@ import { FilterState } from '../FilterForm/FilterForm';
 import { Note } from '../Note/Note';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { SideBar } from '../SideBar/SideBar';
-<<<<<<< HEAD
-import { BiCurrentLocation } from 'react-icons/bi';
-=======
 import { filterByCategory, filterByAuth, filterBySearch, filterByHTTPS, filterByCors } from '../../filterMethods'
->>>>>>> main
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage'
 
 type Props = {};

@@ -61,7 +61,7 @@ export class FeaturedCard extends Component<Props> {
         <p>{Description}</p>
         <p><strong>Authentication:</strong> {Auth.length ? Auth : 'no'}</p>
         <p><strong>Cors:</strong> {Cors}</p>
-        <p><strong>Https:</strong>{HTTPS}</p>
+        <p><strong>Https:</strong> {HTTPS ? 'yes' : 'no'}</p>
         <p><strong>Category:</strong> {Category}</p>
         <button className="featured-card__btn">
           <a href={Link} target="_blank" className="external-link" rel="noreferrer">

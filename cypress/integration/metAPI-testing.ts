@@ -38,5 +38,27 @@ describe('metAPI', () => {
 })
 
 describe('Selected API page', () => {
+  beforeEach(() => {
+    cy.fixture('apiData').then(( data ) => {
+      cy.intercept('https://api.publicapis.org/entries', {
+        statusCode: 200,
+        body: data
+      })
+    })
+    cy.visit('http://localhost:3000/')
+  })
 
+  it('Should be able to click on an api to see more information', () => {
+    cy.get(".api-card-link[href='/api/What Anime']").click()
+      .get('.featured-card').get('.home-link').contains('View all apis')
+      .get('.featured-card').contains('What Anime')
+      .get('.featured-card').contains('Scan anime')
+      .get('.featured-card').contains('Authentication: no')
+      .get('.featured-card').contains('Cors: yes')
+      .get('.featured-card').contains('Https: yes')
+      .get('.featured-card').contains('Category: Anime')
+      .get('.featured-card').get('.featured-card__btn')
+        .get('.external-link').should('have.attr', 'href', "https://soruly.github.io/trace.moe/")
+      .get('.featured-card').get('.save-note__btn').contains('Save Note')
+  })
 })
