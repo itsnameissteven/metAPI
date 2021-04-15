@@ -6,9 +6,9 @@ import {FeaturedCard} from '../FeaturedCard/FeaturedCard';
 import {FilterForm} from '../FilterForm/FilterForm';
 import { FilterState } from '../FilterForm/FilterForm';
 import { Note } from '../Note/Note';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { SideBar } from '../SideBar/SideBar';
-import ErrorMessage from '../ErrorMessage/ErrorMessage'
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage'
 
 type Props = {};
 type Notes = {
@@ -22,6 +22,7 @@ class App extends React.Component<Props> {
     currentApis: Api[];
     favorites: Api[];
     savedNotes: Notes[]
+    error: string;
   };
   constructor(props: Props) {
     super(props);
@@ -29,14 +30,15 @@ class App extends React.Component<Props> {
       apiList: [],
       currentApis: [],
       favorites: [],
-      savedNotes: []
+      savedNotes: [],
+      error: ''
     };
   }
 
   componentDidMount() {
     getApis()
     .then((data) => this.setState({ apiList: data.entries, currentApis: data.entries }))
-    .catch(err => console.log(err.message))
+    .catch(err => this.setState({ error: err.message }))
     const myFavorites = localStorage.getItem('favorites');
     const myNotes = localStorage.getItem('notes');
     myFavorites && this.setState({favorites: JSON.parse(myFavorites)});
@@ -129,26 +131,30 @@ class App extends React.Component<Props> {
   render() {
     this.state.favorites.length && localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
     this.state.savedNotes.length && localStorage.setItem('notes', JSON.stringify(this.state.savedNotes));
-    return (
-      <div className="App">
-        <Switch>
+    if (this.state.error) {
+      return <ErrorMessage statusCode={this.state.error} />
+    } else {
+      return (
+        <div className="App">
           <SideBar></SideBar>
+          <Switch>
           <Route exact path='/' render={() => {
-            return (
-              <main>
-                <h1>metAPI</h1>
-                <FilterForm filter={this.filter} apiList={this.state.apiList}/>
-                <CardContainer 
-                  apiList={this.state.currentApis} 
-                  toggleFavorite={this.toggleFavorite} 
-                  favorites={this.state.favorites}
-                />
-              </main>
-            )
-          }}/>
+            return (              
+                <main>
+                  <h1>metAPI</h1>
+                  <FilterForm filter={this.filter} apiList={this.state.apiList}/>
+                  <CardContainer 
+                    apiList={this.state.currentApis} 
+                    toggleFavorite={this.toggleFavorite} 
+                    favorites={this.state.favorites}
+                  />
+                </main>
+            )}}
+          />
           <Route
-            path="/:title"
+            exact path="/api/:title"
             render={({ match }) => {
+              console.log(match)
               const data = this.state.apiList.find((api) => api.API === match.params.title);
               if (data) {
                 const myNotes = this.state.savedNotes.find(savedNote => savedNote.name === data.API)
@@ -156,26 +162,27 @@ class App extends React.Component<Props> {
                   return <Note note={note} key={index} apiName={myNotes.name} deleteNote={this.deleteNote} />
                 })
                 return (
-                  <main>
-                    <FeaturedCard 
-                      {...data} 
-                      toggleFavorite={this.toggleFavorite} 
-                      saveNote={this.saveNote} 
-                      favorites={this.state.favorites} 
-                    />
-                    <section className='saved-notes'>
-                      <h3>Notes</h3>
-                      {savedNotes}
-                    </section>
-                  </main>
+                    <main>
+                      <FeaturedCard 
+                        {...data} 
+                        toggleFavorite={this.toggleFavorite} 
+                        saveNote={this.saveNote} 
+                        favorites={this.state.favorites} 
+                      />
+                      <section className='saved-notes'>
+                        <h3>Notes</h3>
+                        {savedNotes}
+                      </section>
+                    </main>
                 );
               }
             }}
           />
-          <Route component={ErrorMessage} />
-        </Switch>
-      </div>
-    );
+          <Route render={() => <ErrorMessage statusCode={"404"}/>} />
+          </Switch>
+        </div>
+      );
+    }  
   }
 }
 

@@ -1,13 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ErrorMessage = () => (
-  <div>
-    <h1>404 - Not Found!</h1>
-    <Link to="/">
-      Go Home
-    </Link>
-  </div>
-);
+export const ErrorMessage = (statusCode: any) => {
+  if (parseInt(statusCode.statusCode) < 500) {
+    return (
+      <div>
+        <h1>This is a 400 error</h1>
+      </div>
+    ) 
+  } else {
+    return (
+      <div>
+        <h1>This is a 500 error</h1> 
+      </div>
+    ) 
+  }
+  
+};
 
-export default ErrorMessage;

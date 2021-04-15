@@ -4,7 +4,7 @@ describe('metAPI', () => {
 
   describe('error handling', () => {
 
-    it('test of network stubbing', () => {
+    it('test 400 error', () => {
       cy.intercept({
         method: 'GET',
         url: 'https://api.publicapis.org/entries'
@@ -13,7 +13,24 @@ describe('metAPI', () => {
         statusCode: 404
       })
       cy.visit('http://localhost:3000');
+      cy.contains('400')
+    })
 
+    it('test 500 error', () => {
+      cy.intercept({
+        method: 'GET',
+        url: 'https://api.publicapis.org/entries'
+      },
+      {
+        statusCode: 500
+      })
+      cy.visit('http://localhost:3000');
+      cy.contains('500')
+    })
+
+    it('test bad path', () => {
+      cy.visit('http://localhost:3000/nonexistent-page');
+      cy.contains('400')
     })
 
   })
