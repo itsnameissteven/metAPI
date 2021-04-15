@@ -8,6 +8,7 @@ export interface FilterState {
   Auth: string;
   HTTPS: string;
   Cors: string;
+  currentCategories: JSX.Element[];
 }
 
 type FilterProps = {
@@ -31,16 +32,24 @@ export class FilterForm extends React.Component<FilterProps> {
       Auth: 'all',
       HTTPS: 'all',
       Cors: 'all',
+      currentCategories: [],
     }
   }
 
-  handleChange = (e: any):void => {
+  componentDidMount = () => {
+    this.setState({...this.state, currentCategories: setTimeout(this.categoryOptions, 0)})
+     
+  }
+
+  handleChange = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>):void => {
     this.setState({ [e.target.name]: e.target.value}, () => {
       this.props.filter(this.state)
+      const matchingCards = this.props.filter(this.state)
+      this.categoryOptions(matchingCards)
     })
   }
 
-  handleCatSelection = (e: any):void => {
+  handleCatSelection = (e: React.ChangeEvent<HTMLInputElement>):void => {
     let selectedCategories = this.state.Categories
     if (e.target.checked) {
       selectedCategories.push(e.target.name)
@@ -57,21 +66,35 @@ export class FilterForm extends React.Component<FilterProps> {
     return categories
   }, []);
 
-  categoryOptions = () => this.allCategories().map(category => {
-    return (
-      <div key={category}>
+  categoryOptions = (apiList: Api[]=this.props.apiList) => {
+
+      const categoryBoxes = this.allCategories().map((category, index) => {
+        const categoryLengths = this.getAvailableCategoryLengths(apiList)
+        return (
+          <div key={category} className="category">
         <input type="checkbox" id={category} name={category} onChange={e => this.handleCatSelection(e)} />
-        <label htmlFor={category}>{category}</label>
+        <label htmlFor={category}>{category + `(${categoryLengths[index]})`}</label>
       </div>
     )
   })
+  this.setState({...this.state, currentCategories: categoryBoxes})
+  return categoryBoxes
+}
+
+  getAvailableCategoryLengths = (matchedCards: Api[]) => {
+    const categoryLengths = this.allCategories().map(category => {
+      const matchedPerCategory = matchedCards.filter(card => card.Category === category)
+      return matchedPerCategory.length
+    })
+    return categoryLengths;
+  }
 
   render() {
     return (
       <form>
 
         <div className = "categories">
-          {this.categoryOptions()}
+          {this.state.currentCategories}
         </div>
 
         <label htmlFor="search">Search</label>
@@ -86,7 +109,7 @@ export class FilterForm extends React.Component<FilterProps> {
         </select>
 
         <label htmlFor="HTTPS">HTTPS:</label>
-        <select id="HTTPS" name="HTTPS" onChange={e => this.handleChange(e)}>
+        <select id="HTTPS" name="HTTPS" onChange={(ev) => this.handleChange(ev)}>
           <option value='all'>--All--</option>
           <option value='true'>HTTPS</option>
           <option value='false'>No HTTPS</option>
