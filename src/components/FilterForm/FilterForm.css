@@ -30,7 +30,7 @@ select {
   border: solid 2px #ccc;
   transition: all 0.3s;
   font-size: .4em;
-  width: 5.5vw;
+  /* width: 5.5vw; */
 }
 
 .categories input[type="checkbox"] {
