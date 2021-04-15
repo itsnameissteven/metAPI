@@ -1,6 +1,6 @@
-.api-card-container {
+/* .api-card-container {
   position: relative;
-}
+} */
 
 .api-card {
   position: relative;
@@ -10,6 +10,10 @@
   text-align: left;
   font-size: 0.5em;
   width: 100%;
+}
+
+.api-card:hover {
+  box-shadow: -1px 3px 9px 1px rgba(0, 0, 0, 0.226);
 }
 
 .api-card-link {

@@ -10,7 +10,7 @@ type ApiCardProps = {
 }
 
 export const ApiCard = ({apiData, toggleFavorite, favorites}: ApiCardProps) => {
-  const { API, Auth, Cors, HTTPS, Category, Description, Link } = apiData
+  const { API, Auth, Cors, HTTPS, Category, Description, Link } = apiData;
   return (
     <div className="api-card">
       <div className="favorite-btn-api-card">
