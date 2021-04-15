@@ -127,8 +127,6 @@ class App extends React.Component<Props> {
     this.setState({ savedNotes: [...unEditedNotes, myNote]})
   }
 
-  resetHome = () => this.setState({currentApis: this.state.apiList})
-
   render() {
     this.state.favorites.length && localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
     this.state.savedNotes.length && localStorage.setItem('notes', JSON.stringify(this.state.savedNotes));
@@ -164,7 +162,7 @@ class App extends React.Component<Props> {
                     toggleFavorite={this.toggleFavorite} 
                     saveNote={this.saveNote} 
                     favorites={this.state.favorites} 
-                    resetHome={this.resetHome}
+                    resetHome={() => this.setState({currentApis: this.state.apiList})}
                   />
                   <section className='saved-notes'>
                     <h3>Notes</h3>
