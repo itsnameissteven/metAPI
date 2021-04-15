@@ -17,7 +17,7 @@ export function getApis(): Promise<Api[]> {
 const checkForErrors = (response: Response) => {
   console.log(response)
   if(!response.ok) {
-    throw new Error
+    throw new Error(`${response.status}`)
   } else {
     return response.json()
   }
