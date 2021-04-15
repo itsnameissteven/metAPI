@@ -1,10 +1,43 @@
 .note {
-  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+  border: 1px solid black;
   border-radius: 5px;
-  width: 300px;
-  height: 150px;
+  width: 325px;
+  height: fit-content;
+  margin-bottom: 20px;
 }
 
 .note__details {
-  display: inline;
+  margin: 0;
+  text-align: left;
+}
+
+.delete-btn {
+  margin: 0 -10px -10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  font-size: 22px;
+  background: transparent;
+  border: none;
+  align-self: flex-end;
+  outline: none;
+}
+
+.delete-btn:focus {
+  border: 1px solid rgb(7, 7, 7);
+}
+
+.trash-icon {
+  flex-shrink: 0;
+  transition: all 200ms ease-in;
+}
+.trash-icon:hover {
+  cursor: pointer;
+  color: rgb(99, 99, 99);
 }
