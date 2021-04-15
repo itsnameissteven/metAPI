@@ -33,7 +33,9 @@ class App extends React.Component<Props> {
   }
 
   componentDidMount() {
-    getApis().then((data) => this.setState({ apiList: data.entries, currentApis: data.entries }));
+    getApis()
+    .then((data) => this.setState({ apiList: data.entries, currentApis: data.entries }))
+    .catch(err => console.log(err))
     const myFavorites = localStorage.getItem('favorites');
     const myNotes = localStorage.getItem('notes');
     myFavorites && this.setState({favorites: JSON.parse(myFavorites)});
