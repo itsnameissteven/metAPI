@@ -89,7 +89,7 @@ class App extends React.Component<Props> {
     this.state.savedNotes.length && localStorage.setItem('notes', JSON.stringify(this.state.savedNotes));
     return (
       <div className="App">
-        <SideBar apiList={this.state.favorites}></SideBar>
+        <SideBar apiList={this.state.favorites} toggleFavorite={this.toggleFavorite}></SideBar>
         <Route exact path='/' render={() => {
           return (
             <main>
