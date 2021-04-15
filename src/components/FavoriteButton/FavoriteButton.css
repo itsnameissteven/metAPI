@@ -1,0 +1,35 @@
+.favorite-btn {
+  padding: 4px;
+  font-size: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  width: fit-content;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  outline-color: black;
+  z-index: 10;
+}
+
+.favorite-btn__heart,
+.favorite-btn__heart--favorited {
+  flex-shrink: 0;
+  vertical-align: middle;
+  transition: all 200ms ease-in;
+}
+
+.favorite-btn__heart {
+  fill: rgb(161, 167, 167);
+}
+
+.favorite-btn__heart--favorited {
+  fill: rgb(228, 6, 6);
+}
+
+.favorite-btn__heart:hover,
+.favorite-btn__heart--favorited:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}

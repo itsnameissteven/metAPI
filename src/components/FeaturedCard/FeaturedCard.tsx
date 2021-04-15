@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Api } from "../../apiCalls";
+import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
 import { Link as HomeLink } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 import { MdFavorite } from 'react-icons/md'
@@ -42,17 +43,21 @@ export class FeaturedCard extends Component<Props> {
   }
 
   render() {
-    const {API, Auth, Cors, HTTPS, Category, Description, Link} = this.props
+    const {API, Auth, Cors, HTTPS, Category, Description, Link, favorites} = this.props
+    const { note, ...originalApiData} = this.state
     return (
       <div className="featured-card">
-        <HomeLink to='/' className='home-link'><BiArrowBack className="home-link__arrow" />View all apis</HomeLink>
-        <button
-          className="favorite-btn" 
-          onClick={() =>this.props.toggleFavorite(this.state)}
-        >
-          <MdFavorite className={this.returnClassName()}/>
-        </button>
-        <h2>{API}</h2>
+        <HomeLink to='/' className='home-link'>
+          <BiArrowBack className="home-link__arrow" />View all apis
+        </HomeLink>
+        <div className="favorite-btn-container">
+          <FavoriteButton 
+            toggleFavorite={this.props.toggleFavorite} 
+            apiData={originalApiData} 
+            favorites={favorites}
+          />
+        </div>
+        <h2 className="featured-card__header">{API}</h2>
         <p>{Description}</p>
         <p><strong>Authentication:</strong> {Auth.length ? Auth : 'no'}</p>
         <p><strong>Cors:</strong> {Cors}</p>

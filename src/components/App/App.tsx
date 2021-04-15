@@ -130,8 +130,17 @@ class App extends React.Component<Props> {
       <div className="App">
         <SideBar></SideBar>
         <Route exact path='/' render={() => {
-          return <main><h1>metAPI</h1><FilterForm filter={this.filter} apiList={this.state.apiList}/>
-          <CardContainer apiList={this.state.currentApis}></CardContainer></main>
+          return (
+            <main>
+              <h1>metAPI</h1>
+              <FilterForm filter={this.filter} apiList={this.state.apiList}/>
+              <CardContainer 
+                apiList={this.state.currentApis} 
+                toggleFavorite={this.toggleFavorite} 
+                favorites={this.state.favorites}
+              />
+            </main>
+          )
         }}/>
         <Route
           path="/:title"

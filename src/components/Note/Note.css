@@ -38,5 +38,6 @@
   transition: all 200ms ease-in;
 }
 .trash-icon:hover {
+  cursor: pointer;
   color: rgb(99, 99, 99);
 }

@@ -22,7 +22,7 @@ export const SideBar = (props:{}) => {
       className="hamburger"
       onClick={() => document.querySelector('.side-bar')?.classList.toggle('open')}></GiHamburgerMenu>
       <h2 className="section-label">Saved Apis</h2>
-      <CardContainer apiList={[savedApi, savedApi]}></CardContainer>
+      {/* <CardContainer apiList={[savedApi, savedApi]}></CardContainer> */}
     </div>
   )
 
