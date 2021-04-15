@@ -4,17 +4,12 @@ import { GiHamburgerMenu } from "react-icons/gi"
 import { CardContainer } from '../CardContainer/CardContainer'
 import {Api} from '../../apiCalls'
 
-const savedApi: Api = {
-  API: "Cat Facts",
-  Auth: "",
-  Category: "Animals",
-  Cors: 'no',
-  Description: 'Daily cat facts',
-  HTTPS: true,
-  Link: "https://alexwohlbruck.github.io/cat-facts/"
-} 
+type ApiProp = {
+  apiList: Api[]
+  toggleFavorite: (ApiCard: Api) => void,
+}
 
-export const SideBar = (props:{}) => {
+export const SideBar = ({apiList, toggleFavorite}:ApiProp) => {
 
   return (
     <div className='side-bar'>
@@ -22,7 +17,7 @@ export const SideBar = (props:{}) => {
       className="hamburger"
       onClick={() => document.querySelector('.side-bar')?.classList.toggle('open')}></GiHamburgerMenu>
       <h2 className="section-label">Saved Apis</h2>
-      {/* <CardContainer apiList={[savedApi, savedApi]}></CardContainer> */}
+      <CardContainer apiList={apiList} toggleFavorite={toggleFavorite} favorites={apiList}></CardContainer>
     </div>
   )
 

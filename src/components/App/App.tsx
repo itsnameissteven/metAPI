@@ -8,7 +8,11 @@ import { FilterState } from '../FilterForm/FilterForm';
 import { Note } from '../Note/Note';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { SideBar } from '../SideBar/SideBar';
+<<<<<<< HEAD
 import { BiCurrentLocation } from 'react-icons/bi';
+=======
+import { filterByCategory, filterByAuth, filterBySearch, filterByHTTPS, filterByCors } from '../../filterMethods'
+>>>>>>> main
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage'
 
 type Props = {};
@@ -46,53 +50,13 @@ class App extends React.Component<Props> {
     myNotes && this.setState({savedNotes: JSON.parse(myNotes)});
   }
 
-  filterByCategory = (matchedCards: Api[], stateObj: FilterState) => {
-    if (stateObj.Categories.length) {
-      return matchedCards.filter(api => stateObj.Categories.includes(api.Category))
-    } else {
-      return matchedCards
-    }
-  }
-
-  filterBySearch = (matchedCards: Api[], stateObj: FilterState) => {
-    if (stateObj.search.length) {
-      return matchedCards.filter(api => api.API.toLowerCase().includes(stateObj.search.toLowerCase()))
-    } else {
-      return matchedCards
-    }
-  }
-
-  filterByAuth = (matchedCards: Api[], stateObj: FilterState) => {
-    if (stateObj.Auth !== 'all') {
-      return matchedCards.filter(api => api.Auth === stateObj.Auth)
-    } else {
-      return matchedCards
-    }
-  }
-
-  filterByHTTPS = (matchedCards: Api[], stateObj: FilterState) => {
-    if (stateObj.HTTPS !== 'all') {
-      return matchedCards.filter(api => stateObj.HTTPS === 'true' ? api.HTTPS === true : api.HTTPS === false)
-    } else {
-      return matchedCards
-    }
-  }
-
-  filterByCors = (matchedCards: Api[], stateObj: FilterState) => {
-    if (stateObj.Cors !== 'all') {
-      return matchedCards.filter(api => api.Cors === stateObj.Cors)
-    } else {
-      return matchedCards
-    }
-  }
-
   filter = (stateObj: FilterState): Api[] => {
     let matchedCards = this.state.apiList
-    matchedCards = this.filterByCategory(matchedCards, stateObj)
-    matchedCards = this.filterBySearch(matchedCards, stateObj)
-    matchedCards = this.filterByAuth(matchedCards, stateObj)
-    matchedCards = this.filterByHTTPS(matchedCards, stateObj)
-    matchedCards = this.filterByCors(matchedCards, stateObj)
+    matchedCards = filterByCategory(matchedCards, stateObj)
+    matchedCards = filterBySearch(matchedCards, stateObj)
+    matchedCards = filterByAuth(matchedCards, stateObj)
+    matchedCards = filterByHTTPS(matchedCards, stateObj)
+    matchedCards = filterByCors(matchedCards, stateObj)
     this.setState({ currentApis: matchedCards })
     return matchedCards
   };
@@ -133,14 +97,13 @@ class App extends React.Component<Props> {
   }
 
   render() {
-    this.state.favorites.length && localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
-    this.state.savedNotes.length && localStorage.setItem('notes', JSON.stringify(this.state.savedNotes));
+
     if (this.state.error) {
       return <ErrorMessage statusCode={this.state.error} />
     } else {
       return (
         <div className="App">
-          <SideBar></SideBar>
+          <SideBar apiList={this.state.favorites} toggleFavorite={this.toggleFavorite}></SideBar>
           <Switch>
           <Route exact path='/' render={() => {
             return (              
