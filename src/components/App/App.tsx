@@ -92,13 +92,16 @@ class App extends React.Component<Props> {
   };
 
   toggleFavorite = (ApiCard: Api) => {
-    const alreadySaved = this.state.favorites.some((element) => element.API === ApiCard.API);
-    if(!alreadySaved){
+    const isSaved = this.state.favorites.some((element) => element.API === ApiCard.API);
+    if(!isSaved){
       this.setState({ favorites: [...this.state.favorites, ApiCard] });
     } else {
       const updatedFavorites = this.state.favorites.filter(element => element.API !== ApiCard.API)
       this.setState({ favorites: updatedFavorites})
     }
+    setTimeout(() => {
+      !this.state.favorites.length && localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
+    },0)
   };
 
   saveNote = (ApiName: string, note: string) => {
@@ -128,7 +131,7 @@ class App extends React.Component<Props> {
     this.state.savedNotes.length && localStorage.setItem('notes', JSON.stringify(this.state.savedNotes));
     return (
       <div className="App">
-        <SideBar></SideBar>
+        <SideBar />
         <Route exact path='/' render={() => {
           return (
             <main>
