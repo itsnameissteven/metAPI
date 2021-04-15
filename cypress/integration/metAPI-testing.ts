@@ -36,3 +36,7 @@ describe('metAPI', () => {
   })
 
 })
+
+describe('Selected API page', () => {
+
+})
