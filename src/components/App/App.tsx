@@ -90,35 +90,7 @@ class App extends React.Component<Props> {
   }
 
   render() {
-    // this.state.favorites.length && localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
-    // this.state.savedNotes.length && localStorage.setItem('notes', JSON.stringify(this.state.savedNotes));
-    // return (
-    //   <div className="App">
-    //     <SideBar apiList={this.state.favorites} toggleFavorite={this.toggleFavorite}></SideBar>
-    //     <Route exact path='/' render={() => {
-    //       return (
-    //         <main>
-    //           <h1>metAPI</h1>
-    //           <FilterForm filter={this.filter} apiList={this.state.apiList}/>
-    //           {this.state.currentApis.length === 0 && <p>Sorry No Apis available</p>}
-    //           <CardContainer 
-    //             apiList={this.state.currentApis} 
-    //             toggleFavorite={this.toggleFavorite} 
-    //             favorites={this.state.favorites}
-    //           />
-    //         </main>
-    //       )
-    //     }}/>
-    //     <Route
-    //       path="/:title"
-    //       render={({ match }) => {
-    //         const data = this.state.apiList.find((api) => api.API === match.params.title);
-    //         if (data) {
-    //           const myNotes = this.state.savedNotes.find(savedNote => savedNote.name === data.API)
-    //           const savedNotes = myNotes?.notes.map((note, index) => {
-    //             return <Note note={note} key={index} apiName={myNotes.name} deleteNote={this.deleteNote} />
-    //           })
-    //           return (
+
     if (this.state.error) {
       return <ErrorMessage statusCode={this.state.error} />
     } else {
