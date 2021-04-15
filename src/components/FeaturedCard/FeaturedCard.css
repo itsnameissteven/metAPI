@@ -71,7 +71,7 @@
 
 .featured-card__btn:active {
   transform: translateY(1px);
-  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.226);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .external-link {
