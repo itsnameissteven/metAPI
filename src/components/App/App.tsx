@@ -118,8 +118,10 @@ class App extends React.Component<Props> {
       <div className="App">
         <SideBar apiList={this.state.favorites}></SideBar>
         <Route exact path='/' render={() => {
-          return <main><h1>metAPI</h1><FilterForm filter={this.filter} apiList={this.state.apiList}/>
-          <CardContainer apiList={this.state.currentApis}></CardContainer></main>
+          return <main><h1>metAPI</h1>
+          <FilterForm filter={this.filter} apiList={this.state.apiList}/>
+          {this.state.currentApis.length > 0? <CardContainer apiList={this.state.currentApis}></CardContainer> : <p>Sorry No Apis available</p>}
+          </main>
         }}/>
         <Route
           path="/:title"
