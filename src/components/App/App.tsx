@@ -52,9 +52,14 @@ class App extends React.Component<Props> {
     return matchedCards
   };
 
-  addToFavorites = (ApiCard: Api) => {
+  toggleFavorite = (ApiCard: Api) => {
     const alreadySaved = this.state.favorites.some((element) => element.API === ApiCard.API);
-    !alreadySaved && this.setState({ favorites: [...this.state.favorites, ApiCard] });
+    if(!alreadySaved){
+      this.setState({ favorites: [...this.state.favorites, ApiCard] });
+    } else {
+      const updatedFavorites = this.state.favorites.filter(element => element.API !== ApiCard.API)
+      this.setState({ favorites: updatedFavorites})
+    }
   };
 
   saveNote = (ApiName: string, note: string) => {
@@ -63,13 +68,20 @@ class App extends React.Component<Props> {
     if(hasSavedNotes) {
       const updatedNotes = this.state.savedNotes.map( savedNote => {
         if(savedNote.name === ApiName) {
-          savedNote.notes.push(note);
+          savedNote.notes.unshift(note);
         }
         return savedNote;
       });
       return this.setState({ savedNotes: updatedNotes});
     } 
     this.setState({ savedNotes: [...this.state.savedNotes, {name: ApiName, notes: [note]}]});
+  }
+
+  deleteNote = (apiName: string, content: string) => {
+    const myNote = this.state.savedNotes.find(note => note.name === apiName)
+    const unEditedNotes = this.state.savedNotes.filter(note => note !== myNote)
+    myNote?.notes.splice(myNote.notes.indexOf(content), 1)
+    this.setState({ savedNotes: [...unEditedNotes, myNote]})
   }
 
   render() {
@@ -79,10 +91,18 @@ class App extends React.Component<Props> {
       <div className="App">
         <SideBar apiList={this.state.favorites}></SideBar>
         <Route exact path='/' render={() => {
-          return <main><h1>metAPI</h1>
-          <FilterForm filter={this.filter} apiList={this.state.apiList}/>
-          {this.state.currentApis.length > 0? <CardContainer apiList={this.state.currentApis}></CardContainer> : <p>Sorry No Apis available</p>}
-          </main>
+          return (
+            <main>
+              <h1>metAPI</h1>
+              <FilterForm filter={this.filter} apiList={this.state.apiList}/>
+              {this.state.currentApis.length === 0 && <p>Sorry No Apis available</p>}
+              <CardContainer 
+                apiList={this.state.currentApis} 
+                toggleFavorite={this.toggleFavorite} 
+                favorites={this.state.favorites}
+              />
+            </main>
+          )
         }}/>
         <Route
           path="/:title"
@@ -90,11 +110,19 @@ class App extends React.Component<Props> {
             const data = this.state.apiList.find((api) => api.API === match.params.title);
             if (data) {
               const myNotes = this.state.savedNotes.find(savedNote => savedNote.name === data.API)
-              const savedNotes = myNotes?.notes.map(note => <Note note={note}/>)
+              const savedNotes = myNotes?.notes.map((note, index) => {
+                return <Note note={note} key={index} apiName={myNotes.name} deleteNote={this.deleteNote} />
+              })
               return (
                 <main>
-                  <FeaturedCard {...data} addToFavorites={this.addToFavorites} saveNote={this.saveNote}/>
+                  <FeaturedCard 
+                    {...data} 
+                    toggleFavorite={this.toggleFavorite} 
+                    saveNote={this.saveNote} 
+                    favorites={this.state.favorites} 
+                  />
                   <section className='saved-notes'>
+                    <h3>Notes</h3>
                     {savedNotes}
                   </section>
                 </main>

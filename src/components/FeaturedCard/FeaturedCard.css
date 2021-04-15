@@ -1,10 +1,16 @@
 .featured-card {
+  position: relative;
+  float: left;
   display: inline-block;
-  margin: 100px auto;
-  width: 30%;
-  border: 2px solid black;
+  margin: 100px 0 0 100px;
+  width: 400px;
   border-radius: 6px;
   padding: 20px;
+  box-shadow: -1px 3px 9px 1px rgba(0, 0, 0, 0.226);
+}
+
+.featured-card__header {
+  margin-top: 30px;
 }
 
 .featured-card__notes {
@@ -12,4 +18,68 @@
   height: 150px;
   resize: vertical;
   padding: 20px;
+}
+
+.featured-card p {
+  text-align: left;
+}
+
+.home-link {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  transition: all 200ms ease-in;
+}
+
+.home-link:hover {
+  cursor: pointer;
+  color: rgb(99, 99, 99);
+}
+
+.home-link__arrow {
+  vertical-align: bottom;
+  font-size: 20px;
+}
+
+.favorite-btn-container {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 25px;
+}
+
+.featured-card__btn {
+  background-color: transparent;
+  padding: 8px 20px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  border-radius: 4px;
+  color: black;
+  outline: none;
+  /* outline-offset: 4px; */
+}
+
+.featured-card__btn:hover,
+.featured-card__btn:focus {
+  cursor: pointer;
+  transform: translateY(-1px);
+  box-shadow: -1px 3px 9px 1px rgba(0, 0, 0, 0.226);
+}
+
+.featured-card__btn:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.external-link {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+}
+
+.save-note__btn {
+  margin: 15px 0 0 0;
 }

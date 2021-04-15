@@ -6,9 +6,11 @@ import {Api} from '../../apiCalls'
 
 type ApiProp = {
   apiList: Api[]
+  toggleFavorite: (ApiCard: Api) => void,
+  favorites: Api[]
 }
 
-export const SideBar = ({apiList}:ApiProp) => {
+export const SideBar = ({apiList, toggleFavorite, favorites}:ApiProp) => {
 
   return (
     <div className='side-bar'>
@@ -16,7 +18,7 @@ export const SideBar = ({apiList}:ApiProp) => {
       className="hamburger"
       onClick={() => document.querySelector('.side-bar')?.classList.toggle('open')}></GiHamburgerMenu>
       <h2 className="section-label">Saved Apis</h2>
-      <CardContainer apiList={apiList}></CardContainer>
+      <CardContainer apiList={apiList} toggleFavorite={toggleFavorite} favorites={favorites}></CardContainer>
     </div>
   )
 
