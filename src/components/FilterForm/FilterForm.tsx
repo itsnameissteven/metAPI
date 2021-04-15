@@ -8,7 +8,6 @@ export interface FilterState {
   Auth: string;
   HTTPS: string;
   Cors: string;
-  currentCategories: JSX.Element[];
 }
 
 type FilterProps = {
@@ -32,14 +31,9 @@ export class FilterForm extends React.Component<FilterProps> {
       Auth: 'all',
       HTTPS: 'all',
       Cors: 'all',
-      currentCategories: [],
     }
   }
 
-  componentDidMount = () => {
-    this.setState({...this.state, currentCategories: setTimeout(this.categoryOptions, 0)})
-     
-  }
 
   handleChange = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>):void => {
     this.setState({ [e.target.name]: e.target.value}, () => {
@@ -67,7 +61,6 @@ export class FilterForm extends React.Component<FilterProps> {
   }, []);
 
   categoryOptions = (apiList: Api[]=this.props.apiList) => {
-
       const categoryBoxes = this.allCategories().map((category, index) => {
         const categoryLengths = this.getAvailableCategoryLengths(apiList)
         return (
@@ -77,7 +70,6 @@ export class FilterForm extends React.Component<FilterProps> {
       </div>
     )
   })
-  this.setState({...this.state, currentCategories: categoryBoxes})
   return categoryBoxes
 }
 
@@ -94,7 +86,7 @@ export class FilterForm extends React.Component<FilterProps> {
       <form>
 
         <div className = "categories">
-          {this.state.currentCategories}
+          {this.categoryOptions()}
         </div>
 
         <label htmlFor="search">Search</label>
