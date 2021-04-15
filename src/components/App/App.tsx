@@ -8,6 +8,7 @@ import { FilterState } from '../FilterForm/FilterForm';
 import { Note } from '../Note/Note';
 import {Route} from 'react-router-dom';
 import { SideBar } from '../SideBar/SideBar';
+import { BiCurrentLocation } from 'react-icons/bi';
 
 type Props = {};
 type Notes = {
@@ -126,6 +127,8 @@ class App extends React.Component<Props> {
     this.setState({ savedNotes: [...unEditedNotes, myNote]})
   }
 
+  resetHome = () => this.setState({currentApis: this.state.apiList})
+
   render() {
     this.state.favorites.length && localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
     this.state.savedNotes.length && localStorage.setItem('notes', JSON.stringify(this.state.savedNotes));
@@ -161,6 +164,7 @@ class App extends React.Component<Props> {
                     toggleFavorite={this.toggleFavorite} 
                     saveNote={this.saveNote} 
                     favorites={this.state.favorites} 
+                    resetHome={this.resetHome}
                   />
                   <section className='saved-notes'>
                     <h3>Notes</h3>

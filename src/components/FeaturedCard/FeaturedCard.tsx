@@ -8,6 +8,7 @@ import "./FeaturedCard.css";
 type Props = Api & { 
   toggleFavorite: (ApiCard: Api) => void, 
   saveNote: (ApiName: string, note: string) => void, 
+  resetHome: () => void,
   favorites: Api[]
 };
 
@@ -42,11 +43,11 @@ export class FeaturedCard extends Component<Props> {
   }
 
   render() {
-    const {API, Auth, Cors, HTTPS, Category, Description, Link, favorites} = this.props
+    const {API, Auth, Cors, HTTPS, Category, Description, Link, favorites, resetHome} = this.props
     const { note, ...originalApiData} = this.state
     return (
       <div className="featured-card">
-        <HomeLink to='/' className='home-link'>
+        <HomeLink to='/' className='home-link' onClick={resetHome}>
           <BiArrowBack className="home-link__arrow" />View all apis
         </HomeLink>
         <div className="favorite-btn-container">
