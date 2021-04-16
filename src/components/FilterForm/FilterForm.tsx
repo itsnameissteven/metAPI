@@ -74,7 +74,7 @@ export class FilterForm extends React.Component<FilterProps> {
     })
     if (apiList.length) this.setState({...this.state, currentCategories: categoryBoxes})
     return categoryBoxes
-}
+  }
 
   getAvailableCategoryLengths = (matchedCards: Api[]) => {
     const categoryLengths = this.allCategories().map(category => {
