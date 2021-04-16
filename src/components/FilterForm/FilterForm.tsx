@@ -65,9 +65,14 @@ export class FilterForm extends React.Component<FilterProps> {
         const categoryLengths = this.getAvailableCategoryLengths(apiList)
         return (
           <div key={category} className="category">
-        <input type="checkbox" id={category} name={category} onChange={e => this.handleCatSelection(e)} />
-        <label htmlFor={category}>{category + `(${categoryLengths[index]})`}</label>
-      </div>
+            <input 
+              type="checkbox" 
+              id={category} 
+              name={category} 
+              onChange={e => this.handleCatSelection(e)} 
+            />
+            <label htmlFor={category}>{category + `(${categoryLengths[index]})`}</label>
+          </div>
     )
   })
   return categoryBoxes

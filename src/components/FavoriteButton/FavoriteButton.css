@@ -25,7 +25,7 @@
 }
 
 .favorite-btn__heart--favorited {
-  fill: rgb(228, 6, 6);
+  fill: #e40606;
 }
 
 .favorite-btn__heart:hover,
