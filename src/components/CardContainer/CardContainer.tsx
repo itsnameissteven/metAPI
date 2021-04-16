@@ -21,6 +21,6 @@ export const CardContainer = ({apiList, toggleFavorite, favorites}: ApiProp) => 
     )
   })
 
-  return <div className={'card-container'}>{ApiCards}</div>;
+  return <div className='card-container'>{ApiCards}</div>;
 
 }

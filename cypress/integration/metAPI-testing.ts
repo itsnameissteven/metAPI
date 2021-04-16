@@ -83,3 +83,56 @@ describe('Selected API page', () => {
       .get('.note').should('not.exist')
   })
 })
+
+describe('Adding apis to favorites', () => {
+  beforeEach(() => {
+    cy.fixture('apiData').then(( data ) => {
+      cy.intercept('https://api.publicapis.org/entries', {
+        statusCode: 200,
+        body: data
+      })
+    })
+    cy.visit('http://localhost:3000/')
+  })
+
+  it('Should be able to save an api to favorites', () => {
+    cy.visit('http://localhost:3000/api/What%20Anime')
+      .get('.favorite-btn__heart').should('exist')
+      .get('.favorite-btn__heart--favorited').should('not.exist')
+      .get('.favorite-btn-container').click()
+      .get('.favorite-btn__heart--favorited').should('exist')
+      .get('.favorite-btn__heart').should('not.exist')
+      .get('.hamburger').click()
+      .get('.side-bar').get('.api-card').contains('What Anime')
+  })
+
+  it('Should be able to remove an api from favorites from detail page', () => {
+    cy.visit('http://localhost:3000/api/What%20Anime')
+      .get('.favorite-btn-container').click()
+      .get('.hamburger').click()
+      .get('.side-bar').get('.api-card').contains('What Anime')
+      .get('.hamburger').click()
+      .get('.favorite-btn-container').click()
+      .get('.hamburger').click()
+      .get('.side-bar').get('.api-card').should('not.exist')
+  })
+
+  it('Should be able to remove a favorite from the the saved apis side bar', () => {
+    cy.visit('http://localhost:3000/api/What%20Anime')
+      .get('.favorite-btn-container').click()
+      .get('.hamburger').click()
+      .get('.side-bar').get('.api-card').get('.favorite-btn-api-card').click()
+      .get('.side-bar').get('.api-card').should('not.exist')
+  })
+
+  it.only('Should be able to favorite apis from the home page', () => {
+    cy.get('.api-card').contains('Cat Facts')
+      .get('.favorite-btn-api-card').click({ multiple: true } )
+      .get('.hamburger').click()
+      .get('.side-bar').contains('catAPI')
+      .get('.side-bar').contains('Noun Project')
+      .get('.side-bar').contains('Google Books')
+      .get('.side-bar').contains('Metacert')
+      .get('.side-bar').contains('RandomDog')
+  })
+})
