@@ -133,7 +133,7 @@ class App extends React.Component<Props> {
                         toggleFavorite={this.toggleFavorite} 
                         saveNote={this.saveNote} 
                         favorites={this.state.favorites} 
-                        resetHome={() => this.setState({ currentList: this.state.apiList })}
+                        resetHome={() => this.setState({ currentApis: this.state.apiList })}
                       />
                       <section className='saved-notes'>
                         <h3>Notes</h3>
