@@ -8,6 +8,7 @@ export interface FilterState {
   Auth: string;
   HTTPS: string;
   Cors: string;
+  currentCategories: JSX.Element[]
 }
 
 type FilterProps = {
@@ -31,6 +32,7 @@ export class FilterForm extends React.Component<FilterProps> {
       Auth: 'all',
       HTTPS: 'all',
       Cors: 'all',
+      currentCategories: []
     }
   }
 
@@ -61,16 +63,17 @@ export class FilterForm extends React.Component<FilterProps> {
   }, []);
 
   categoryOptions = (apiList: Api[]=this.props.apiList) => {
-      const categoryBoxes = this.allCategories().map((category, index) => {
-        const categoryLengths = this.getAvailableCategoryLengths(apiList)
-        return (
-          <div key={category} className="category">
-        <input type="checkbox" id={category} name={category} onChange={e => this.handleCatSelection(e)} />
-        <label htmlFor={category}>{category + `(${categoryLengths[index]})`}</label>
-      </div>
-    )
-  })
-  return categoryBoxes
+    const categoryBoxes = this.allCategories().map((category, index) => {
+      const categoryLengths = this.getAvailableCategoryLengths(apiList);
+      return (
+        <div key={category} className="category">
+          <input type="checkbox" id={category} name={category} onChange={e => this.handleCatSelection(e)} />
+          <label htmlFor={category}>{category + `(${categoryLengths[index]})`}</label>
+        </div>
+      )
+    })
+    if (apiList.length) this.setState({...this.state, currentCategories: categoryBoxes})
+    return categoryBoxes
 }
 
   getAvailableCategoryLengths = (matchedCards: Api[]) => {
@@ -81,16 +84,24 @@ export class FilterForm extends React.Component<FilterProps> {
     return categoryLengths;
   }
 
+  showCategories = ():JSX.Element[] | undefined => {
+    if (this.state.currentCategories.length) {
+      return this.state.currentCategories;
+    } else {
+      this.categoryOptions();
+    }
+  }
+
   render() {
     return (
       <form>
 
         <div className = "categories">
-          {this.categoryOptions()}
+          {this.showCategories()}
         </div>
 
         <label htmlFor="search">Search</label>
-        <input id="search" name="search" placeholder="Search" className="search-bar" onChange={e => this.handleChange(e)}></input>
+        <input id="search" name="search" placeholder="🔎 Search" className="search-bar" onChange={e => this.handleChange(e)}></input>
 
         <label htmlFor="Auth">Auth:</label>
         <select id="Auth" name="Auth" onChange={e => this.handleChange(e)}>
