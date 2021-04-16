@@ -3,12 +3,12 @@ import { Api } from "../../apiCalls";
 import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
 import { Link as HomeLink } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
-import { MdFavorite } from 'react-icons/md'
 import "./FeaturedCard.css";
 
 type Props = Api & { 
   toggleFavorite: (ApiCard: Api) => void, 
   saveNote: (ApiName: string, note: string) => void, 
+  resetHome: () => void,
   favorites: Api[]
 };
 
@@ -43,11 +43,11 @@ export class FeaturedCard extends Component<Props> {
   }
 
   render() {
-    const {API, Auth, Cors, HTTPS, Category, Description, Link, favorites} = this.props
+    const {API, Auth, Cors, HTTPS, Category, Description, Link, favorites, resetHome} = this.props
     const { note, ...originalApiData} = this.state
     return (
       <div className="featured-card">
-        <HomeLink to='/' className='home-link'>
+        <HomeLink to='/' className='home-link' onClick={resetHome}>
           <BiArrowBack className="home-link__arrow" />View all apis
         </HomeLink>
         <div className="favorite-btn-container">
@@ -61,16 +61,16 @@ export class FeaturedCard extends Component<Props> {
         <p>{Description}</p>
         <p><strong>Authentication:</strong> {Auth.length ? Auth : 'no'}</p>
         <p><strong>Cors:</strong> {Cors}</p>
-        <p><strong>Https:</strong>{HTTPS}</p>
+        <p><strong>Https:</strong> {HTTPS ? 'yes' : 'no'}</p>
         <p><strong>Category:</strong> {Category}</p>
         <button className="featured-card__btn">
-          <a href={Link} target="_blank" className="external-link">
+          <a href={Link} target="_blank" className="external-link" rel="noreferrer">
             Visit Website
           </a>
         </button>
         <textarea
           name='note'
-          value={this.state.note}
+          value={note}
           className="featured-card__notes"
           placeholder="Notes"
           onChange={this.handleChange}
