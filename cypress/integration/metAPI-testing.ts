@@ -38,6 +38,12 @@ describe('metAPI', () => {
   describe('Sidebar', () => {
     
     beforeEach(() => {
+      cy.fixture('apiData').then(( data ) => {
+        cy.intercept('https://api.publicapis.org/entries', {
+          statusCode: 200,
+          body: data
+        })
+      })
       cy.visit('http://localhost:3000');
       cy.get('.hamburger').click()
     })
@@ -58,9 +64,15 @@ describe('metAPI', () => {
     })
   })
 
-  describe.only('Filter form', () => {
+  describe('Filter form', () => {
 
     beforeEach(() => {
+      cy.fixture('apiData').then(( data ) => {
+        cy.intercept('https://api.publicapis.org/entries', {
+          statusCode: 200,
+          body: data
+        })
+      })
       cy.visit('http://localhost:3000')
     })
 
@@ -71,11 +83,40 @@ describe('metAPI', () => {
     it('Should allow a user to filter by category', () => {
       cy.get('form').get('.category').first().find('label').click()
       cy.get('.api-card').should('have.length', 13)
+      cy.get('.api-card').first().contains('Animals')
     })
 
     it('Should allow a user to filter by search', () => {
-      cy.get('form').find('.search-bar').type('cat').should('have.value', 'cat').wait(1000)
+      cy.get('form').find('.search-bar').type('cat').should('have.value', 'cat')
+      cy.get('.api-card').should('have.length', 5)
+      cy.get('.api-card').contains('cat')
     })
+
+    it('Should allow a user to filter by Auth', () => {
+      cy.get('form').find('#Auth').select('OAuth')
+      cy.get('.api-card').should('have.length', 8)
+      cy.get('.api-card').first().contains('OAuth')
+    })
+
+    it('Should allow a user to filter by HTTPS', () => {
+      cy.get('form').find('#HTTPS').select('No HTTPS')
+      cy.get('.api-card').should('have.length', 5)
+      cy.get('.api-card').first().contains('HTTPS: no')
+    })
+
+    it('Should allow a user to filter by Cors', () => {
+      cy.get('form').find('#Cors').select('No')
+      cy.get('.api-card').should('have.length', 3)
+      cy.get('.api-card').first().contains('Cors: no')
+    })
+
+    it('Should show a user an error message if no Apis meet the search criteria', () => {
+      cy.get('form').find('#Cors').select('No')
+      cy.get('form').find('#HTTPS').select('No HTTPS')
+      cy.get('form').find('#Auth').select('OAuth')
+      cy.get('main').contains('Sorry No Apis available')
+    })
+
   })
 
 })
@@ -158,7 +199,7 @@ describe('Adding apis to favorites', () => {
       .get('.side-bar').get('.api-card').contains('What Anime')
   })
 
-  it.only('Should save Favorites between page load', () => {
+  it('Should save Favorites between page load', () => {
     cy.visit('http://localhost:3000/api/What%20Anime')
       .get('.favorite-btn__heart').should('exist')
       .get('.favorite-btn-container').click()
