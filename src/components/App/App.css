@@ -12,6 +12,10 @@
   grid-template: 1fr / 1fr 4fr;
 }
 
+.search-error {
+  font-size: 2em;
+}
+
 main {
   grid-column-start: 2;
 }

@@ -108,7 +108,7 @@ class App extends React.Component<Props> {
                 <main>
                   <h1>metAPI</h1>
                   <FilterForm filter={this.filter} apiList={this.state.apiList}/>
-                  {this.state.currentApis.length <= 0 && <p className="search-error">Sorry No Apis available</p>}
+                  {this.state.currentApis.length <= 0 && <p className="search-error">⚠ Sorry No Apis available</p>}
                   <CardContainer 
                     apiList={this.state.currentApis} 
                     toggleFavorite={this.toggleFavorite} 
