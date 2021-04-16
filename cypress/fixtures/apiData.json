@@ -1,0 +1,383 @@
+{
+  "count": 740,
+  "entries": [
+    {
+      "API": "Cat Facts",
+      "Description": "Daily cat facts",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "no",
+      "Link": "https://alexwohlbruck.github.io/cat-facts/",
+      "Category": "Animals"
+    },
+    {
+      "API": "catAPI",
+      "Description": "Random pictures of cats",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "yes",
+      "Link": "https://github.com/ThatCopy/catAPI/wiki/Usage",
+      "Category": "Animals"
+    },
+    {
+      "API": "Cats",
+      "Description": "Pictures of cats from Tumblr",
+      "Auth": "apiKey",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://docs.thecatapi.com/",
+      "Category": "Animals"
+    },
+    {
+      "API": "Dog Facts",
+      "Description": "Random dog facts",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://dukengn.github.io/Dog-facts-API/",
+      "Category": "Animals"
+    },
+    {
+      "API": "Dogs",
+      "Description": "Based on the Stanford Dogs Dataset",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "yes",
+      "Link": "https://dog.ceo/dog-api/",
+      "Category": "Animals"
+    },
+    {
+      "API": "HTTPCat",
+      "Description": "Cat for every HTTP Status",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://http.cat/",
+      "Category": "Animals"
+    },
+    {
+      "API": "IUCN",
+      "Description": "IUCN Red List of Threatened Species",
+      "Auth": "apiKey",
+      "HTTPS": false,
+      "Cors": "unknown",
+      "Link": "http://apiv3.iucnredlist.org/api/v3/docs",
+      "Category": "Animals"
+    },
+    {
+      "API": "Movebank",
+      "Description": "Movement and Migration data of animals",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://github.com/movebank/movebank-api-doc",
+      "Category": "Animals"
+    },
+    {
+      "API": "RandomCat",
+      "Description": "Random pictures of cats",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "yes",
+      "Link": "https://aws.random.cat/meow",
+      "Category": "Animals"
+    },
+    {
+      "API": "RandomDog",
+      "Description": "Random pictures of dogs",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "yes",
+      "Link": "https://random.dog/woof.json",
+      "Category": "Animals"
+    },
+    {
+      "API": "RandomFox",
+      "Description": "Random pictures of foxes",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "no",
+      "Link": "https://randomfox.ca/floof/",
+      "Category": "Animals"
+    },
+    {
+      "API": "RescueGroups",
+      "Description": "Adoption",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://userguide.rescuegroups.org/display/APIDG/API+Developers+Guide+Home",
+      "Category": "Animals"
+    },
+    {
+      "API": "Shibe.Online",
+      "Description": "Random pictures of Shiba Inu, cats or birds",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "yes",
+      "Link": "http://shibe.online/",
+      "Category": "Animals"
+    },
+    {
+      "API": "AniList",
+      "Description": "Anime discovery \u0026 tracking",
+      "Auth": "OAuth",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://github.com/AniList/ApiV2-GraphQL-Docs",
+      "Category": "Anime"
+    },
+    {
+      "API": "AnimeChan",
+      "Description": "Anime quotes (over 10k+)",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "no",
+      "Link": "https://github.com/RocktimSaikia/anime-chan",
+      "Category": "Anime"
+    },
+    {
+      "API": "AnimeNewsNetwork",
+      "Description": "Anime industry news",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "yes",
+      "Link": "https://www.animenewsnetwork.com/encyclopedia/api.php",
+      "Category": "Anime"
+    },
+    {
+      "API": "Jikan",
+      "Description": "Unofficial MyAnimeList API",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "yes",
+      "Link": "https://jikan.moe",
+      "Category": "Anime"
+    },
+    {
+      "API": "Kitsu",
+      "Description": "Anime discovery platform",
+      "Auth": "OAuth",
+      "HTTPS": true,
+      "Cors": "yes",
+      "Link": "https://kitsu.docs.apiary.io/",
+      "Category": "Anime"
+    },
+    {
+      "API": "MyAnimeList",
+      "Description": "Anime and Manga Database and Community",
+      "Auth": "OAuth",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://myanimelist.net/clubs.php?cid=13727",
+      "Category": "Anime"
+    },
+    {
+      "API": "Studio Ghibli",
+      "Description": "Resources from Studio Ghibli films",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "yes",
+      "Link": "https://ghibliapi.herokuapp.com",
+      "Category": "Anime"
+    },
+    {
+      "API": "What Anime",
+      "Description": "Scan anime image to get specific detail",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "yes",
+      "Link": "https://soruly.github.io/trace.moe/",
+      "Category": "Anime"
+    },
+    {
+      "API": "AbuseIPDB",
+      "Description": "IP/domain/URL reputation",
+      "Auth": "apiKey",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://docs.abuseipdb.com/",
+      "Category": "Anti-Malware"
+    },
+    {
+      "API": "AlienVault Open Threat Exchange (OTX)",
+      "Description": "IP/domain/URL reputation",
+      "Auth": "apiKey",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://otx.alienvault.com/api",
+      "Category": "Anti-Malware"
+    },
+    {
+      "API": "Google Safe Browsing",
+      "Description": "Google Link/Domain Flagging",
+      "Auth": "apiKey",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://developers.google.com/safe-browsing/",
+      "Category": "Anti-Malware"
+    },
+    {
+      "API": "Metacert",
+      "Description": "Metacert Link Flagging",
+      "Auth": "apiKey",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://metacert.com/",
+      "Category": "Anti-Malware"
+    },
+    {
+      "API": "URLScan.io",
+      "Description": "Scan and Analyse URLs",
+      "Auth": "apiKey",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://urlscan.io/about-api/",
+      "Category": "Anti-Malware"
+    },
+    {
+      "API": "VirusTotal",
+      "Description": "VirusTotal File/URL Analysis",
+      "Auth": "apiKey",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://www.virustotal.com/en/documentation/public-api/",
+      "Category": "Anti-Malware"
+    },
+    {
+      "API": "Web Of Trust (WOT)",
+      "Description": "Website reputation",
+      "Auth": "apiKey",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://support.mywot.com/hc/en-us/articles/360024398673-3-Using-the-API",
+      "Category": "Anti-Malware"
+    },
+    {
+      "API": "Behance",
+      "Description": "Design",
+      "Auth": "apiKey",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://www.behance.net/dev",
+      "Category": "Art \u0026 Design"
+    },
+    {
+      "API": "Cooper Hewitt",
+      "Description": "Smithsonian Design Museum",
+      "Auth": "apiKey",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://collection.cooperhewitt.org/api",
+      "Category": "Art \u0026 Design"
+    },
+    {
+      "API": "Dribbble",
+      "Description": "Design",
+      "Auth": "OAuth",
+      "HTTPS": false,
+      "Cors": "unknown",
+      "Link": "http://developer.dribbble.com/v2/",
+      "Category": "Art \u0026 Design"
+    },
+    {
+      "API": "Europeana",
+      "Description": "European Museum and Galleries content",
+      "Auth": "apiKey",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://pro.europeana.eu/resources/apis/search",
+      "Category": "Art \u0026 Design"
+    },
+    {
+      "API": "Harvard Art Museums",
+      "Description": "Art",
+      "Auth": "apiKey",
+      "HTTPS": false,
+      "Cors": "unknown",
+      "Link": "https://github.com/harvardartmuseums/api-docs",
+      "Category": "Art \u0026 Design"
+    },
+    {
+      "API": "Iconfinder",
+      "Description": "Icons",
+      "Auth": "apiKey",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://developer.iconfinder.com",
+      "Category": "Art \u0026 Design"
+    },
+    {
+      "API": "Icons8",
+      "Description": "Icons",
+      "Auth": "OAuth",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "http://docs.icons8.apiary.io/#reference/0/meta",
+      "Category": "Art \u0026 Design"
+    },
+    {
+      "API": "Metropolitan Museum of Art",
+      "Description": "Met Museum of Art",
+      "Auth": "",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://metmuseum.github.io/",
+      "Category": "Art \u0026 Design"
+    },
+    {
+      "API": "Noun Project",
+      "Description": "Icons",
+      "Auth": "OAuth",
+      "HTTPS": false,
+      "Cors": "unknown",
+      "Link": "http://api.thenounproject.com/index.html",
+      "Category": "Art \u0026 Design"
+    },
+    {
+      "API": "Rijksmuseum",
+      "Description": "Art",
+      "Auth": "apiKey",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://www.rijksmuseum.nl/en/api",
+      "Category": "Art \u0026 Design"
+    },
+    {
+      "API": "Bhagavad Gita",
+      "Description": "Bhagavad Gita text",
+      "Auth": "OAuth",
+      "HTTPS": true,
+      "Cors": "yes",
+      "Link": "https://bhagavadgita.io/api",
+      "Category": "Books"
+    },
+    {
+      "API": "Bible",
+      "Description": "RESTful Bible API with 7 versions, 4 languages and multiple features",
+      "Auth": "apiKey",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://bibleapi.co/",
+      "Category": "Books"
+    },
+    {
+      "API": "British National Bibliography",
+      "Description": "Books",
+      "Auth": "",
+      "HTTPS": false,
+      "Cors": "unknown",
+      "Link": "http://bnb.data.bl.uk/",
+      "Category": "Books"
+    },
+    {
+      "API": "Google Books",
+      "Description": "Books",
+      "Auth": "OAuth",
+      "HTTPS": true,
+      "Cors": "unknown",
+      "Link": "https://developers.google.com/books/",
+      "Category": "Books"
+    }
+  ]
+}

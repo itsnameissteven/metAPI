@@ -2,13 +2,13 @@ import React from 'react';
 import { AiFillDelete } from 'react-icons/ai'
 import './Note.css'
 
-type Note = {
+type NoteProps = {
   note: string,
   apiName: string,
   deleteNote: (apiName: string, content: string) => void
 }
 
-export const Note = ({note, apiName, deleteNote}: Note) => {
+export const Note = ({note, apiName, deleteNote}: NoteProps) => {
   return (
     <article className="note">
       <p className='note__details'> {note}</p>

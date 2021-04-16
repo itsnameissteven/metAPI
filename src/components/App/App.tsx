@@ -58,18 +58,22 @@ class App extends React.Component<Props> {
   };
 
   toggleFavorite = (ApiCard: Api) => {
-    const alreadySaved = this.state.favorites.some((element) => element.API === ApiCard.API);
-    if(!alreadySaved){
+    const isSaved = this.state.favorites.some((element) => element.API === ApiCard.API);
+    if(!isSaved){
       this.setState({ favorites: [...this.state.favorites, ApiCard] });
     } else {
       const updatedFavorites = this.state.favorites.filter(element => element.API !== ApiCard.API)
       this.setState({ favorites: updatedFavorites})
     }
+    setTimeout(() => {
+      !this.state.favorites.length && localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
+    },0)
   };
 
   saveNote = (ApiName: string, note: string) => {
     if(!note) return null;
     const hasSavedNotes = this.state.savedNotes.some(note => note.name === ApiName);
+    console.log(hasSavedNotes)
     if(hasSavedNotes) {
       const updatedNotes = this.state.savedNotes.map( savedNote => {
         if(savedNote.name === ApiName) {
@@ -90,7 +94,8 @@ class App extends React.Component<Props> {
   }
 
   render() {
-
+    this.state.favorites.length && localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
+    this.state.savedNotes.length && localStorage.setItem('notes', JSON.stringify(this.state.savedNotes));
     if (this.state.error) {
       return <ErrorMessage statusCode={this.state.error} />
     } else {
@@ -128,6 +133,7 @@ class App extends React.Component<Props> {
                         toggleFavorite={this.toggleFavorite} 
                         saveNote={this.saveNote} 
                         favorites={this.state.favorites} 
+                        resetHome={() => this.setState({ currentApis: this.state.apiList })}
                       />
                       <section className='saved-notes'>
                         <h3>Notes</h3>
