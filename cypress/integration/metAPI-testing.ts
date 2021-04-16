@@ -82,6 +82,15 @@ describe('Selected API page', () => {
       .get('.note').get('.delete-btn').click()
       .get('.note').should('not.exist')
   })
+
+  it('Should save notes between reloads', () => {
+    cy.visit('http://localhost:3000/api/What%20Anime')
+      .get('.featured-card__notes').type('Create an app where Anyone can scan in an anime character')
+      .get('.save-note__btn').click()
+      .get('.note').contains('Create an app where Anyone can scan in an anime character')
+      .reload()
+      .get('.note').contains('Create an app where Anyone can scan in an anime character')
+  })
 })
 
 describe('Adding apis to favorites', () => {
@@ -106,6 +115,17 @@ describe('Adding apis to favorites', () => {
       .get('.side-bar').get('.api-card').contains('What Anime')
   })
 
+  it.only('Should save Favorites between page load', () => {
+    cy.visit('http://localhost:3000/api/What%20Anime')
+      .get('.favorite-btn__heart').should('exist')
+      .get('.favorite-btn-container').click()
+      .get('.hamburger').click()
+      .get('.side-bar').get('.api-card').contains('What Anime')
+      .reload()
+      .get('.hamburger').click()
+      .get('.side-bar').get('.api-card').contains('What Anime')
+  })
+
   it('Should be able to remove an api from favorites from detail page', () => {
     cy.visit('http://localhost:3000/api/What%20Anime')
       .get('.favorite-btn-container').click()
@@ -125,7 +145,7 @@ describe('Adding apis to favorites', () => {
       .get('.side-bar').get('.api-card').should('not.exist')
   })
 
-  it.only('Should be able to favorite apis from the home page', () => {
+  it('Should be able to favorite apis from the home page', () => {
     cy.get('.api-card').contains('Cat Facts')
       .get('.favorite-btn-api-card').click({ multiple: true } )
       .get('.hamburger').click()

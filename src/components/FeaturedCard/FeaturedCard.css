@@ -83,3 +83,10 @@
 .save-note__btn {
   margin: 15px 0 0 0;
 }
+
+@media screen and (max-width: 1150px) {
+  .featured-card {
+    float: unset;
+    margin: 100px 0 0 0;
+  }
+}

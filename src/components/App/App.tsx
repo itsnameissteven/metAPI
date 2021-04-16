@@ -73,6 +73,7 @@ class App extends React.Component<Props> {
   saveNote = (ApiName: string, note: string) => {
     if(!note) return null;
     const hasSavedNotes = this.state.savedNotes.some(note => note.name === ApiName);
+    console.log(hasSavedNotes)
     if(hasSavedNotes) {
       const updatedNotes = this.state.savedNotes.map( savedNote => {
         if(savedNote.name === ApiName) {
@@ -93,7 +94,8 @@ class App extends React.Component<Props> {
   }
 
   render() {
-
+    this.state.favorites.length && localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
+    this.state.savedNotes.length && localStorage.setItem('notes', JSON.stringify(this.state.savedNotes));
     if (this.state.error) {
       return <ErrorMessage statusCode={this.state.error} />
     } else {
