@@ -2,21 +2,26 @@
   box-sizing: border-box;
 }
 
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .App {
   background: #fffaf4;
   text-align: center;
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 35px 1fr;
   min-height: 100vh;
 }
 
 main {
-  /* float: right; */
   grid-column: 2;
+  transition: all 0.5s ease;
+}
+
+.shrink {
+  justify-self: end;
+  width: calc(100% - 265px);
 }
 
 h1 {
@@ -49,15 +54,6 @@ h1 {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .saved-notes {
   padding: 10px 0;
   float: right;
@@ -68,6 +64,10 @@ h1 {
   height: 100vh;
   width: 400px;
   overflow: scroll;
+}
+
+.saved-notes::-webkit-scrollbar {
+  display: none;
 }
 
 .saved-notes h3 {
@@ -81,12 +81,12 @@ h1 {
   .saved-notes {
     float: unset;
     height: unset;
-    padding: 0px;
+    padding: 0;
     width: 100%;
     border: none;
     margin-bottom: 10px;
-    /* display: grid; */
     justify-items: center;
+    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
     grid-gap: 10px;
   }
@@ -96,15 +96,22 @@ h1 {
   }
 }
 
-@media screen and (max-width: 400px) {
-  .api-detail-page {
-    grid-column: 1/3;
-    width: 100%;
-    padding-left: 35px;
+@media screen and (max-width: 800px) {
+  .shrink {
+    justify-self: unset;
+    width: unset;
   }
+}
+
+@media screen and (max-width: 400px) {
   main {
     grid-column: 1/3;
     width: 100%;
     padding-left: 35px;
+  }
+
+  h1 {
+    font-size: 2em;
+    margin: 15px 0;
   }
 }

@@ -20,7 +20,7 @@
 
 .open {
   transform: translateX(0px);
-  visibility: visible;
+  /* visibility: visible; */
   transition: all 0.5s ease 0s;
   grid-column: 1;
 }

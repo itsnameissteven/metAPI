@@ -105,7 +105,7 @@ class App extends React.Component<Props> {
           <Switch>
           <Route exact path='/' render={() => {
             return (              
-                <main>
+                <main className="home-page">
                   <h1>metAPI</h1>
                   <FilterForm filter={this.filter} apiList={this.state.apiList}/>
                   <CardContainer 
