@@ -1,13 +1,16 @@
 .side-bar {
-  float: left;
+  /* float: left; */
   height: 100%;
   position: fixed;
   background-color: whitesmoke;
-  transform: translate3d(-88%, 0px, 0px);
+  transform: translateX(-265px);
+  /* transform: translate3d(-2px, 0px, 0px); */
   transition: all 0.5s ease 0s;
   /* visibility: visible; */
-  width: 20%;
+  grid-column: 1;
+  width: 300px;
   overflow-y: scroll;
+  z-index: 5;
 }
 
 .side-bar::-webkit-scrollbar {
@@ -16,9 +19,10 @@
 }
 
 .open {
-  transform: translate3d(0%, 0px, 0px);
+  transform: translateX(0px);
   visibility: visible;
   transition: all 0.5s ease 0s;
+  grid-column: 1;
 }
 
 .section-label {

@@ -10,12 +10,13 @@
   background: #fffaf4;
   text-align: center;
   display: grid;
-  grid-template: 1fr / 1fr 4fr;
+  grid-template-columns: 300px 1fr;
   min-height: 100vh;
 }
 
 main {
-  grid-column-start: 2;
+  /* float: right; */
+  grid-column: 2;
 }
 
 h1 {
@@ -80,9 +81,10 @@ h1 {
   .saved-notes {
     float: unset;
     height: unset;
-    padding: 0;
+    padding: 0px;
     width: 100%;
     border: none;
+    margin-bottom: 10px;
     /* display: grid; */
     justify-items: center;
     grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
@@ -91,5 +93,18 @@ h1 {
   .saved-notes h3 {
     grid-column: 1/ -1;
     margin-bottom: unset;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .api-detail-page {
+    grid-column: 1/3;
+    width: 100%;
+    padding-left: 35px;
+  }
+  main {
+    grid-column: 1/3;
+    width: 100%;
+    padding-left: 35px;
   }
 }

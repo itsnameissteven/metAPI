@@ -101,7 +101,7 @@ class App extends React.Component<Props> {
     } else {
       return (
         <div className="App">
-          <SideBar apiList={this.state.favorites} toggleFavorite={this.toggleFavorite}></SideBar>
+          <SideBar apiList={this.state.favorites} toggleFavorite={this.toggleFavorite} />
           <Switch>
           <Route exact path='/' render={() => {
             return (              
@@ -127,7 +127,7 @@ class App extends React.Component<Props> {
                   return <Note note={note} key={index} apiName={myNotes.name} deleteNote={this.deleteNote} />
                 })
                 return (
-                    <main>
+                    <main className="api-detail-page">
                       <FeaturedCard 
                         {...data} 
                         toggleFavorite={this.toggleFavorite} 
