@@ -17,7 +17,7 @@
 .favorite-btn__heart--favorited {
   flex-shrink: 0;
   vertical-align: middle;
-  transition: all 200ms ease-in;
+  transition: transform 200ms ease-in;
 }
 
 .favorite-btn__heart {
