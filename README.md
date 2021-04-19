@@ -46,10 +46,12 @@ Cameron Mackintosh
 
 #### Featured Api page:
 ![]()
-#### Notes ?:
-![]()
+![metAPI gif](https://user-images.githubusercontent.com/72054706/115273016-441ebd00-a0fc-11eb-99f1-03fa4ed3c229.gif)
+
 #### Sidebar Open:
 ![]()
+![homepage](https://user-images.githubusercontent.com/72054706/115272966-36693780-a0fc-11eb-96b5-3f36bf36209f.png)
+
 ### Technologies Used:
 * [Typescript](https://www.typescriptlang.org/)
 * [Webpack](https://webpack.js.org/)
