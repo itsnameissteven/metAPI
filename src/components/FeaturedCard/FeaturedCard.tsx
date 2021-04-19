@@ -63,11 +63,9 @@ export class FeaturedCard extends Component<Props> {
         <p><strong>Cors:</strong> {Cors}</p>
         <p><strong>Https:</strong> {HTTPS ? 'yes' : 'no'}</p>
         <p><strong>Category:</strong> {Category}</p>
-        <button className="featured-card__btn">
-          <a href={Link} target="_blank" className="external-link" rel="noreferrer">
-            Visit Website
-          </a>
-        </button>
+        <a href={Link} target="_blank" className="external-link" rel="noreferrer">
+          <button className="featured-card__btn">Visit Website</button>
+        </a>
         <textarea
           name='note'
           value={note}

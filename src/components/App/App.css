@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
 
 .App {
@@ -67,7 +67,7 @@ h1 {
   font-size: 30px;
 }
 
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 1200px) {
   .saved-notes {
     float: unset;
     height: unset;
