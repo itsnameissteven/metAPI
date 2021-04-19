@@ -19,6 +19,10 @@
 [linkedin3]: https://www.linkedin.com/in/cameron-mackintosh-1341b173
 [github3]: https://github.com/cbmackintosh
 
+## Deployed Site
+
+[metAPI](https://metapi-app.herokuapp.com/)
+
 ### Learning Goals:
  * Get comfortable with TypeScript
  * Continue gaining familiarity with React / Cypress / Router
@@ -68,7 +72,7 @@
   * Clone down the repo through the command line
   * Run ```$npm install``` to install dependencies
   * Run ```$npm start``` to open the page on a local browser
-* Otherwise the site is deployed and accessible [here](https://metapi-app.herokuapp.com/) 
+* Otherwise the site is deployed and accessible [here](https://metapi-app.herokuapp.com/api/Cats) 
 
 ## Running Tests
 * After completing the setup steps above:
