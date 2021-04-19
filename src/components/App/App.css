@@ -2,12 +2,8 @@
   box-sizing: border-box;
 }
 
-/* *::-webkit-scrollbar {
-  display: none;
-} */
-
 .App {
-  background: #fffaf4;
+  background: #bee3db;
   text-align: center;
   display: grid;
   grid-template-columns: 35px 1fr;
@@ -26,17 +22,6 @@ main {
 
 h1 {
   font-size: 5em;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-header {
@@ -60,7 +45,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-left: 2px solid black;
+  border-left: 1px solid black;
   height: 100vh;
   width: 400px;
   overflow: scroll;

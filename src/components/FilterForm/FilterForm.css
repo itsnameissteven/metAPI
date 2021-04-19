@@ -28,10 +28,9 @@ select {
   border-radius: 5px;
   display: inline-block;
   padding: 4px;
-  border: solid 2px rgb(240, 240, 240);
+  border: solid 2px rgb(247, 247, 247);
   transition: all 0.3s;
   font-size: 0.4em;
-  /* width: 5.5vw; */
 }
 
 .categories input[type="checkbox"] {
@@ -39,6 +38,6 @@ select {
 }
 
 .categories input[type="checkbox"]:checked + label {
-  border: solid 2px #ffdaad;
-  background-color: #ffdaad;
+  border: solid 2px #ffd6ba;
+  background-color: #ffd6ba;
 }

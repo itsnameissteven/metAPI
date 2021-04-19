@@ -1,12 +1,9 @@
 .side-bar {
-  /* float: left; */
   height: 100%;
   position: fixed;
-  background-color: whitesmoke;
+  background-color: #faf9f9;
   transform: translateX(-265px);
-  /* transform: translate3d(-2px, 0px, 0px); */
   transition: all 0.5s ease 0s;
-  /* visibility: visible; */
   grid-column: 1;
   width: 300px;
   overflow-y: scroll;
@@ -20,7 +17,6 @@
 
 .open {
   transform: translateX(0px);
-  /* visibility: visible; */
   transition: all 0.5s ease 0s;
   grid-column: 1;
 }

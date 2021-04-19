@@ -97,6 +97,7 @@ export class FilterForm extends React.Component<FilterProps> {
         <label htmlFor="search">Search</label>
         <input id="search" name="search" placeholder="Search" className="search-bar" onChange={e => this.handleChange(e)}></input>
 
+
         <label htmlFor="Auth">Auth:</label>
         <select id="Auth" name="Auth" onChange={e => this.handleChange(e)}>
           <option value='all'>--All--</option>
@@ -104,6 +105,7 @@ export class FilterForm extends React.Component<FilterProps> {
           <option value=''>No</option>
           <option>OAuth</option>
         </select>
+        
 
         <label htmlFor="HTTPS">HTTPS:</label>
         <select id="HTTPS" name="HTTPS" onChange={(ev) => this.handleChange(ev)}>
