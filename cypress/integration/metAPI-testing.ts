@@ -45,16 +45,17 @@ describe('metAPI', () => {
         })
       })
       cy.visit('http://localhost:3000');
-      cy.get('.hamburger').click()
     })
 
     it('Should allow a user to view their saved cards in the sidebar', () => {
       cy.get('main').find('.favorite-btn__heart').first().click()
+      cy.get('.arrow').click()
       cy.get('.side-bar').find('.api-card')
     })
 
     it('Should allow a user to click on a saved card to view the details page', () => {
       cy.get('main').find('.favorite-btn__heart').first().click()
+      cy.get('.arrow').click()
       cy.get('.side-bar').find('.api-card').click()
       cy.get('.featured-card').contains('Cat Facts')
     })
@@ -195,7 +196,7 @@ describe('Adding apis to favorites', () => {
       .get('.favorite-btn-container').click()
       .get('.favorite-btn__heart--favorited').should('exist')
       .get('.favorite-btn__heart').should('not.exist')
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.side-bar').get('.api-card').contains('What Anime')
   })
 
@@ -203,28 +204,28 @@ describe('Adding apis to favorites', () => {
     cy.visit('http://localhost:3000/api/What%20Anime')
       .get('.favorite-btn__heart').should('exist')
       .get('.favorite-btn-container').click()
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.side-bar').get('.api-card').contains('What Anime')
       .reload()
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.side-bar').get('.api-card').contains('What Anime')
   })
 
   it('Should be able to remove an api from favorites from detail page', () => {
     cy.visit('http://localhost:3000/api/What%20Anime')
       .get('.favorite-btn-container').click()
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.side-bar').get('.api-card').contains('What Anime')
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.favorite-btn-container').click()
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.side-bar').get('.api-card').should('not.exist')
   })
 
   it('Should be able to remove a favorite from the the saved apis side bar', () => {
     cy.visit('http://localhost:3000/api/What%20Anime')
       .get('.favorite-btn-container').click()
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.side-bar').get('.api-card').get('.favorite-btn-api-card').click()
       .get('.side-bar').get('.api-card').should('not.exist')
   })
@@ -232,7 +233,7 @@ describe('Adding apis to favorites', () => {
   it('Should be able to favorite apis from the home page', () => {
     cy.get('.api-card').contains('Cat Facts')
       .get('.favorite-btn-api-card').click({ multiple: true } )
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.side-bar').contains('catAPI')
       .get('.side-bar').contains('Noun Project')
       .get('.side-bar').contains('Google Books')
