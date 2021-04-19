@@ -1,7 +1,24 @@
 # Meta-API
 
 Cameron Mackintosh
-## [Steven Mancine](https://github.com/itsnameissteven), [Jackson McGuire](https://github.com/Jacksonmcguire) and [Cameron Mackintosh](https://github.com/cbmackintosh)
+## Contributers 
+[<img src="https://img.shields.io/badge/LinkedIn-steven--mancine-informational?style=for-the-badge&labelColor=black&logo=linkedin&logoColor=0077b5&&color=0FBBD6"/>][linkedin1]
+[<img src="https://img.shields.io/badge/Github-itsnameissteven-informational?style=for-the-badge&labelColor=black&logo=github&color=8B0BD5"/>][github1]
+
+
+[<img src="https://img.shields.io/badge/LinkedIn-jackson--mcguire-informational?style=for-the-badge&labelColor=black&logo=linkedin&logoColor=0077b5&&color=0FBBD6"/>][linkedin2]
+[<img src="https://img.shields.io/badge/Github-jacksonmcguire-informational?style=for-the-badge&labelColor=black&logo=github&color=8B0BD5"/>][github2]
+
+
+[<img src="https://img.shields.io/badge/LinkedIn-cameron--mackintosh-informational?style=for-the-badge&labelColor=black&logo=linkedin&logoColor=0077b5&&color=0FBBD6"/>][linkedin3]
+[<img src="https://img.shields.io/badge/Github-cbmackintosh-informational?style=for-the-badge&labelColor=black&logo=github&color=8B0BD5"/>][github3]
+<!--Personal Definitions -->
+[linkedin1]: https://www.linkedin.com/in/steven-mancine-13509521/
+[github1]: https://github.com/itsnameissteven
+[linkedin2]: https://www.linkedin.com/in/jackson-m-66297b204/
+[github2]: https://github.com/Jacksonmcguire
+[linkedin3]: https://www.linkedin.com/in/cameron-mackintosh-1341b173
+[github3]: https://github.com/cbmackintosh
 
 ### Learning Goals:
  * Get comfortable with typescript
