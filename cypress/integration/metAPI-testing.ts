@@ -35,6 +35,91 @@ describe('metAPI', () => {
 
   })
 
+  describe('Sidebar', () => {
+    
+    beforeEach(() => {
+      cy.fixture('apiData').then(( data ) => {
+        cy.intercept('https://api.publicapis.org/entries', {
+          statusCode: 200,
+          body: data
+        })
+      })
+      cy.visit('http://localhost:3000');
+    })
+
+    it('Should allow a user to view their saved cards in the sidebar', () => {
+      cy.get('main').find('.favorite-btn__heart').first().click()
+      cy.get('.arrow').click()
+      cy.get('.side-bar').find('.api-card')
+    })
+
+    it('Should allow a user to click on a saved card to view the details page', () => {
+      cy.get('main').find('.favorite-btn__heart').first().click()
+      cy.get('.arrow').click()
+      cy.get('.side-bar').find('.api-card').click()
+      cy.get('.featured-card').contains('Cat Facts')
+    })
+
+    it('Should start out with no saved cards', () => {
+      cy.get('.side-bar').find('.api-card').should('not.exist')
+    })
+  })
+
+  describe('Filter form', () => {
+
+    beforeEach(() => {
+      cy.fixture('apiData').then(( data ) => {
+        cy.intercept('https://api.publicapis.org/entries', {
+          statusCode: 200,
+          body: data
+        })
+      })
+      cy.visit('http://localhost:3000')
+    })
+
+    it('Should show a user how many options are available for each category', () => {
+      cy.get('form').find('.category').first().contains('Animals(13)')
+    })
+
+    it('Should allow a user to filter by category', () => {
+      cy.get('form').get('.category').first().find('label').click()
+      cy.get('.api-card').should('have.length', 13)
+      cy.get('.api-card').first().contains('Animals')
+    })
+
+    it('Should allow a user to filter by search', () => {
+      cy.get('form').find('.search-bar').type('cat').should('have.value', 'cat')
+      cy.get('.api-card').should('have.length', 5)
+      cy.get('.api-card').contains('cat')
+    })
+
+    it('Should allow a user to filter by Auth', () => {
+      cy.get('form').find('#Auth').select('OAuth')
+      cy.get('.api-card').should('have.length', 8)
+      cy.get('.api-card').first().contains('OAuth')
+    })
+
+    it('Should allow a user to filter by HTTPS', () => {
+      cy.get('form').find('#HTTPS').select('No HTTPS')
+      cy.get('.api-card').should('have.length', 5)
+      cy.get('.api-card').first().contains('HTTPS: no')
+    })
+
+    it('Should allow a user to filter by Cors', () => {
+      cy.get('form').find('#Cors').select('No')
+      cy.get('.api-card').should('have.length', 3)
+      cy.get('.api-card').first().contains('Cors: no')
+    })
+
+    it('Should show a user an error message if no Apis meet the search criteria', () => {
+      cy.get('form').find('#Cors').select('No')
+      cy.get('form').find('#HTTPS').select('No HTTPS')
+      cy.get('form').find('#Auth').select('OAuth')
+      cy.get('main').contains('Sorry No Apis available')
+    })
+
+  })
+
 })
 
 describe('Selected API page', () => {
@@ -111,36 +196,36 @@ describe('Adding apis to favorites', () => {
       .get('.favorite-btn-container').click()
       .get('.favorite-btn__heart--favorited').should('exist')
       .get('.favorite-btn__heart').should('not.exist')
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.side-bar').get('.api-card').contains('What Anime')
   })
 
-  it.only('Should save Favorites between page load', () => {
+  it('Should save Favorites between page load', () => {
     cy.visit('http://localhost:3000/api/What%20Anime')
       .get('.favorite-btn__heart').should('exist')
       .get('.favorite-btn-container').click()
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.side-bar').get('.api-card').contains('What Anime')
       .reload()
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.side-bar').get('.api-card').contains('What Anime')
   })
 
   it('Should be able to remove an api from favorites from detail page', () => {
     cy.visit('http://localhost:3000/api/What%20Anime')
       .get('.favorite-btn-container').click()
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.side-bar').get('.api-card').contains('What Anime')
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.favorite-btn-container').click()
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.side-bar').get('.api-card').should('not.exist')
   })
 
   it('Should be able to remove a favorite from the the saved apis side bar', () => {
     cy.visit('http://localhost:3000/api/What%20Anime')
       .get('.favorite-btn-container').click()
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.side-bar').get('.api-card').get('.favorite-btn-api-card').click()
       .get('.side-bar').get('.api-card').should('not.exist')
   })
@@ -148,7 +233,7 @@ describe('Adding apis to favorites', () => {
   it('Should be able to favorite apis from the home page', () => {
     cy.get('.api-card').contains('Cat Facts')
       .get('.favorite-btn-api-card').click({ multiple: true } )
-      .get('.hamburger').click()
+      .get('.arrow').click()
       .get('.side-bar').contains('catAPI')
       .get('.side-bar').contains('Noun Project')
       .get('.side-bar').contains('Google Books')

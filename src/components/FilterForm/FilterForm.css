@@ -1,43 +1,21 @@
+@import "//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css";
 select {
   width: 25%;
   height: 2em;
-  margin-top: 5px;
+  margin: 10px;
+  font-weight: 560;
+  border-radius: 5px;
 }
 
 .search-bar {
-  width: 90%;
+  width: 95%;
   border-radius: 5px;
   border: 1px solid;
   padding: 10px;
-}
-
-.category {
+  font-family: FontAwesome;
   margin-top: 5px;
+  font-size: 1.3em
 }
 
-.categories {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 20px;
-}
 
-.categories label {
-  background-color: #fff;
-  border-radius: 5px;
-  display: inline-block;
-  padding: 4px;
-  border: solid 2px rgb(247, 247, 247);
-  transition: all 0.3s;
-  font-size: 0.4em;
-}
 
-.categories input[type="checkbox"] {
-  display: none;
-}
-
-.categories input[type="checkbox"]:checked + label {
-  border: solid 2px #ffd6ba;
-  background-color: #ffd6ba;
-}

@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .App {
@@ -8,6 +9,10 @@
   display: grid;
   grid-template-columns: 35px 1fr;
   min-height: 100vh;
+}
+
+.search-error {
+  font-size: 2em;
 }
 
 main {

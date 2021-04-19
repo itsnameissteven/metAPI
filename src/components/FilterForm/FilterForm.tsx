@@ -1,6 +1,7 @@
 import React from 'react'
 import {Api} from '../../apiCalls'
 import './FilterForm.css'
+import {Category} from '../Category/Category'
 
 export interface FilterState {
   search: string;
@@ -8,6 +9,7 @@ export interface FilterState {
   Auth: string;
   HTTPS: string;
   Cors: string;
+  currentCategories: JSX.Element[]
 }
 
 type FilterProps = {
@@ -31,6 +33,7 @@ export class FilterForm extends React.Component<FilterProps> {
       Auth: 'all',
       HTTPS: 'all',
       Cors: 'all',
+      currentCategories: []
     }
   }
 
@@ -61,67 +64,61 @@ export class FilterForm extends React.Component<FilterProps> {
   }, []);
 
   categoryOptions = (apiList: Api[]=this.props.apiList) => {
-      const categoryBoxes = this.allCategories().map((category, index) => {
-        const categoryLengths = this.getAvailableCategoryLengths(apiList)
-        return (
-          <div key={category} className="category">
-            <input 
-              type="checkbox" 
-              id={category} 
-              name={category} 
-              onChange={e => this.handleCatSelection(e)} 
-            />
-            <label htmlFor={category}>{category + `(${categoryLengths[index]})`}</label>
-          </div>
-    )
-  })
-  return categoryBoxes
-}
+    const categoryBoxes = this.allCategories().map((category, index) => {
+      const categoryLengths = this.getAvailableCategoryLengths(apiList);
+      return (
+        <Category key={category} category={category} categoryLength=
+        {categoryLengths[index]} handleCatSelection={this.handleCatSelection}/>
+      )
+    })
+    if (apiList.length) this.setState({...this.state, currentCategories: categoryBoxes})
+    return categoryBoxes
+  }
 
   getAvailableCategoryLengths = (matchedCards: Api[]) => {
     const categoryLengths = this.allCategories().map(category => {
       const matchedPerCategory = matchedCards.filter(card => card.Category === category)
-      return matchedPerCategory.length
+      return matchedPerCategory.length;
     })
     return categoryLengths;
+  }
+
+  showCategories = ():JSX.Element[] | undefined => {
+    if (this.state.currentCategories.length) {
+      return this.state.currentCategories;
+    } else {
+      this.categoryOptions();
+    }
   }
 
   render() {
     return (
       <form>
-
         <div className = "categories">
-          {this.categoryOptions()}
+          {this.showCategories()}
         </div>
-
-        <label htmlFor="search">Search</label>
-        <input id="search" name="search" placeholder="Search" className="search-bar" onChange={e => this.handleChange(e)}></input>
-
-
-        <label htmlFor="Auth">Auth:</label>
+        <label htmlFor="search"></label>
+        <input id="search" name="search" placeholder="&#61442; Search" className="search-bar" onChange={e => this.handleChange(e)}></input>
+        <label htmlFor="Auth"></label>
         <select id="Auth" name="Auth" onChange={e => this.handleChange(e)}>
-          <option value='all'>--All--</option>
+          <option value='all'>Auth: --All--</option>
           <option>apiKey</option>
           <option value=''>No</option>
           <option>OAuth</option>
         </select>
-        
-
-        <label htmlFor="HTTPS">HTTPS:</label>
+        <label htmlFor="HTTPS"></label>
         <select id="HTTPS" name="HTTPS" onChange={(ev) => this.handleChange(ev)}>
-          <option value='all'>--All--</option>
+          <option value='all'>HTTPS: --All--</option>
           <option value='true'>HTTPS</option>
           <option value='false'>No HTTPS</option>
         </select>
-
-        <label htmlFor="Cors">Cors:</label>
+        <label htmlFor="Cors"></label>
         <select id="Cors" name="Cors" onChange={e => this.handleChange(e)}>
-          <option value='all'>--All--</option>
+          <option value='all'>Cors: --All--</option>
           <option value='yes'>Yes</option>
           <option value='no'>No</option>
           <option value='unknown'>Unknown</option>
         </select>
-
       </form>
     )
   }
