@@ -68,7 +68,7 @@
   * Clone down the repo through the command line
   * Run ```$npm install``` to install dependencies
   * Run ```$npm start``` to open the page on a local browser
-* Otherwise the site is deployed and accessible [here](https://metapi-app.herokuapp.com/api/) 
+* Otherwise the site is deployed and accessible [here](https://metapi-app.herokuapp.com/) 
 
 ## Running Tests
 * After completing the setup steps above:
