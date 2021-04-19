@@ -46,7 +46,7 @@ Cameron Mackintosh
 
 #### Featured Api page:
 ![]()
-![metAPI gif](https://user-images.githubusercontent.com/72054706/115273016-441ebd00-a0fc-11eb-99f1-03fa4ed3c229.gif)
+![detailspage](https://user-images.githubusercontent.com/72054706/115273114-64e71280-a0fc-11eb-9c5a-2def030e4b0a.png)
 
 #### Sidebar Open:
 ![]()
