@@ -13,7 +13,7 @@ describe('metAPI', () => {
         statusCode: 404
       })
       cy.visit('http://localhost:3000');
-      cy.contains('400')
+      cy.contains(`Sorry, we couldn't find the page you're looking for.`)
     })
 
     it('test 500 error', () => {
@@ -25,12 +25,19 @@ describe('metAPI', () => {
         statusCode: 500
       })
       cy.visit('http://localhost:3000');
-      cy.contains('500')
+      cy.contains('Sorry, there was a problem. Please try again later')
     })
 
     it('test bad path', () => {
       cy.visit('http://localhost:3000/nonexistent-page');
-      cy.contains('400')
+      cy.contains(`Sorry, we couldn't find the page you're looking for.`)
+    })
+
+    it('test refresh button on error message', () => {
+      cy.visit('http://localhost:3000/nonexistent-page')
+      .get('.error-button').click()
+      .get('.card-container').should('exist')
+      .get('form').should('exist')
     })
 
   })
