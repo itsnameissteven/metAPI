@@ -33,6 +33,13 @@ describe('metAPI', () => {
       cy.contains(`Sorry, we couldn't find the page you're looking for.`)
     })
 
+    it('test refresh button on error message', () => {
+      cy.visit('http://localhost:3000/nonexistent-page')
+      .get('.error-button').click()
+      .get('.card-container').should('exist')
+      .get('form').should('exist')
+    })
+
   })
 
   describe('Sidebar', () => {
