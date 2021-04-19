@@ -1,13 +1,13 @@
 .side-bar {
-  float: left;
   height: 100%;
-  position:fixed;
-  background-color: whitesmoke;
-  transform: translate3d(-88%, 0px, 0px);
+  position: fixed;
+  background-color: #faf9f9;
+  transform: translateX(-265px);
   transition: all 0.5s ease 0s;
-  visibility: visible;
-  width: 20%;
+  grid-column: 1;
+  width: 300px;
   overflow-y: scroll;
+  z-index: 5;
 }
 
 .side-bar::-webkit-scrollbar {
@@ -16,9 +16,13 @@
 }
 
 .open {
-  transform: translate3d(0%, 0px, 0px);
-  visibility: visible;
+  transform: translateX(0px);
   transition: all 0.5s ease 0s;
+  grid-column: 1;
+}
+
+.open-arrow {
+  transform: rotate(-180deg);
 }
 
 .section-label {
@@ -28,13 +32,14 @@
   padding: 10px;
 }
 
-.hamburger {
+.arrow {
   float: right;
   width: 30px;
   height: 30px;
   margin: 3px;
   margin-bottom: 50;
   right: 0;
+  transition: all 0.5s ease 0s;
 }
 
 .side-bar .card-container {

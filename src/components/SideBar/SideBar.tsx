@@ -1,6 +1,6 @@
 import React from 'react'
 import './SideBar.css'
-import { GiHamburgerMenu } from "react-icons/gi"
+import { HiArrowRight } from "react-icons/hi"
 import { CardContainer } from '../CardContainer/CardContainer'
 import {Api} from '../../apiCalls'
 
@@ -10,14 +10,18 @@ type ApiProp = {
 }
 
 export const SideBar = ({apiList, toggleFavorite}:ApiProp) => {
+  const toggleSideBar = () => {
+    document.querySelector('.side-bar')?.classList.toggle('open');
+    document.querySelector('.arrow')?.classList.toggle('open-arrow')
+  }
 
   return (
     <div className='side-bar'>
-      <GiHamburgerMenu 
-      className="hamburger"
-      onClick={() => document.querySelector('.side-bar')?.classList.toggle('open')}></GiHamburgerMenu>
+      <HiArrowRight 
+      className="arrow"
+      onClick={toggleSideBar} />
       <h2 className="section-label">Saved Apis</h2>
-      <CardContainer apiList={apiList} toggleFavorite={toggleFavorite} favorites={apiList}></CardContainer>
+      <CardContainer apiList={apiList} toggleFavorite={toggleFavorite} favorites={apiList} />
     </div>
   )
 

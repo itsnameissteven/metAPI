@@ -1,21 +1,23 @@
 .category {
   margin-top: 5px;
-} 
+}
 
 .categories {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .categories label {
+  background-color: #fff;
   border-radius: 5px;
   display: inline-block;
   padding: 4px;
-  border: solid 2px #ccc;
+  border: solid 2px rgb(247, 247, 247);
   transition: all 0.3s;
-  font-size: .4em;
+  font-size: 0.4em;
 }
 
 .categories input[type="checkbox"] {
@@ -23,5 +25,6 @@
 }
 
 .categories input[type="checkbox"]:checked + label {
-  border: solid 2px green;
+  border: solid 2px #ffd6ba;
+  background-color: #ffd6ba;
 }
