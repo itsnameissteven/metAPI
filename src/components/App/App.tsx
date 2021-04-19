@@ -145,7 +145,13 @@ class App extends React.Component<Props> {
               }
             }}
           />
-          <Route render={() => <ErrorMessage statusCode={"404"}/>} />
+          <Route render={() => {
+            return (
+              <main>
+                <ErrorMessage statusCode={"404"}/>
+              </main>
+            )
+          }} />
           </Switch>
         </div>
       );
