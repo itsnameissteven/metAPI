@@ -2,11 +2,12 @@
   position: relative;
   float: left;
   display: inline-block;
-  margin: 100px 0 0 100px;
+  margin: 100px 0 0 350px;
   width: 400px;
   border-radius: 6px;
   padding: 20px;
   box-shadow: -1px 3px 9px 1px rgba(0, 0, 0, 0.226);
+  background-color: #fff;
 }
 
 .featured-card__header {
@@ -59,7 +60,6 @@
   border-radius: 4px;
   color: black;
   outline: none;
-  /* outline-offset: 4px; */
 }
 
 .featured-card__btn:hover,
@@ -88,5 +88,12 @@
   .featured-card {
     float: unset;
     margin: 100px 0 0 0;
+    padding: 35px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .featured-card {
+    width: 90%;
   }
 }
