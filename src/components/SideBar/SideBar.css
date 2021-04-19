@@ -21,6 +21,10 @@
   grid-column: 1;
 }
 
+.open-arrow {
+  transform: rotate(-180deg);
+}
+
 .section-label {
   margin-bottom: 50px;
   font-size: 2.3em;
@@ -28,13 +32,14 @@
   padding: 10px;
 }
 
-.hamburger {
+.arrow {
   float: right;
   width: 30px;
   height: 30px;
   margin: 3px;
   margin-bottom: 50;
   right: 0;
+  transition: all 0.5s ease 0s;
 }
 
 .side-bar .card-container {
