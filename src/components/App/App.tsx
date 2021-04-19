@@ -6,7 +6,7 @@ import {FeaturedCard} from '../FeaturedCard/FeaturedCard';
 import {FilterForm} from '../FilterForm/FilterForm';
 import { FilterState } from '../FilterForm/FilterForm';
 import { Note } from '../Note/Note';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { SideBar } from '../SideBar/SideBar';
 import { filterByCategory, filterByAuth, filterBySearch, filterByHTTPS, filterByCors } from '../../filterMethods'
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage'
