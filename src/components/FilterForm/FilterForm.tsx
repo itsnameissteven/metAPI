@@ -1,6 +1,7 @@
 import React from 'react'
 import {Api} from '../../apiCalls'
 import './FilterForm.css'
+import {Category} from '../Category/Category'
 
 export interface FilterState {
   search: string;
@@ -66,10 +67,8 @@ export class FilterForm extends React.Component<FilterProps> {
     const categoryBoxes = this.allCategories().map((category, index) => {
       const categoryLengths = this.getAvailableCategoryLengths(apiList);
       return (
-        <div key={category} className="category">
-          <input type="checkbox" id={category} name={category} onChange={e => this.handleCatSelection(e)} />
-          <label htmlFor={category}>{category + `(${categoryLengths[index]})`}</label>
-        </div>
+        <Category key={category} category={category} categoryLength=
+        {categoryLengths[index]} handleCatSelection={this.handleCatSelection}/>
       )
     })
     if (apiList.length) this.setState({...this.state, currentCategories: categoryBoxes})
@@ -79,7 +78,7 @@ export class FilterForm extends React.Component<FilterProps> {
   getAvailableCategoryLengths = (matchedCards: Api[]) => {
     const categoryLengths = this.allCategories().map(category => {
       const matchedPerCategory = matchedCards.filter(card => card.Category === category)
-      return matchedPerCategory.length
+      return matchedPerCategory.length;
     })
     return categoryLengths;
   }
@@ -95,7 +94,6 @@ export class FilterForm extends React.Component<FilterProps> {
   render() {
     return (
       <form>
-
         <div className = "categories">
           {this.showCategories()}
         </div>
@@ -108,14 +106,12 @@ export class FilterForm extends React.Component<FilterProps> {
           <option value=''>No</option>
           <option>OAuth</option>
         </select>
-
         <label htmlFor="HTTPS"></label>
         <select id="HTTPS" name="HTTPS" onChange={(ev) => this.handleChange(ev)}>
           <option value='all'>HTTPS: --All--</option>
           <option value='true'>HTTPS</option>
           <option value='false'>No HTTPS</option>
         </select>
-
         <label htmlFor="Cors"></label>
         <select id="Cors" name="Cors" onChange={e => this.handleChange(e)}>
           <option value='all'>Cors: --All--</option>
@@ -123,7 +119,6 @@ export class FilterForm extends React.Component<FilterProps> {
           <option value='no'>No</option>
           <option value='unknown'>Unknown</option>
         </select>
-
       </form>
     )
   }

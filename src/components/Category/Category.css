@@ -1,0 +1,27 @@
+.category {
+  margin-top: 5px;
+} 
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.categories label {
+  border-radius: 5px;
+  display: inline-block;
+  padding: 4px;
+  border: solid 2px #ccc;
+  transition: all 0.3s;
+  font-size: .4em;
+}
+
+.categories input[type="checkbox"] {
+  display: none;
+}
+
+.categories input[type="checkbox"]:checked + label {
+  border: solid 2px green;
+}
