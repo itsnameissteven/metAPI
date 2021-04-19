@@ -4,6 +4,7 @@ body,
 .App,
 main {
   height: 100%;
+  background-color: #BEE3DB;
 }
 
 .error-message-container {
@@ -11,7 +12,7 @@ main {
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
 }
 
 .error-message {
@@ -22,6 +23,7 @@ main {
   border: 2px solid black;
   border-radius: 5px;
   padding: 5%;
+  background-color: #FAF9F9;
 }
 
 .error-button {
@@ -34,4 +36,5 @@ main {
 .warning-icon {
   height: 10%;
   width: 10%;
+  color: #FF7575;
 }
