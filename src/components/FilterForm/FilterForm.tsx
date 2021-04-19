@@ -42,7 +42,7 @@ export class FilterForm extends React.Component<FilterProps> {
     this.setState({ [e.target.name]: e.target.value}, () => {
       this.props.filter(this.state)
       const matchingCards = this.props.filter(this.state)
-      this.categoryOptions(matchingCards)
+      this.updateCategory(matchingCards)
     })
   }
 
@@ -63,16 +63,20 @@ export class FilterForm extends React.Component<FilterProps> {
     return categories
   }, []);
 
+  updateCategory = (apiList: Api[]=this.props.apiList) => {
+    const categoryBoxes = this.categoryOptions(apiList)
+    if (apiList.length) this.setState({...this.state, currentCategories: categoryBoxes})
+    return categoryBoxes
+  }
+
   categoryOptions = (apiList: Api[]=this.props.apiList) => {
-    const categoryBoxes = this.allCategories().map((category, index) => {
+    return this.allCategories().map((category, index) => {
       const categoryLengths = this.getAvailableCategoryLengths(apiList);
       return (
         <Category key={category} category={category} categoryLength=
         {categoryLengths[index]} handleCatSelection={this.handleCatSelection}/>
       )
     })
-    if (apiList.length) this.setState({...this.state, currentCategories: categoryBoxes})
-    return categoryBoxes
   }
 
   getAvailableCategoryLengths = (matchedCards: Api[]) => {
@@ -86,8 +90,8 @@ export class FilterForm extends React.Component<FilterProps> {
   showCategories = ():JSX.Element[] | undefined => {
     if (this.state.currentCategories.length) {
       return this.state.currentCategories;
-    } else {
-      this.categoryOptions();
+    } else if (this.props.apiList.length && !this.state.currentCategories.length) {
+      return this.categoryOptions()
     }
   }
 
