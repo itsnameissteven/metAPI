@@ -4,7 +4,7 @@ describe('metAPI', () => {
 
   describe('error handling', () => {
 
-    it.only('test 400 error', () => {
+    it('test 400 error', () => {
       cy.intercept({
         method: 'GET',
         url: 'https://api.publicapis.org/entries'

@@ -103,8 +103,8 @@ class App extends React.Component<Props> {
         <div className="App">
           <SideBar apiList={this.state.favorites} toggleFavorite={this.toggleFavorite} />
           <Switch>
-          <Route exact path='/' render={() => {
-            return (              
+            <Route exact path='/' render={() => {
+              return (              
                 <main className="home-page">
                   <h1>metAPI</h1>
                   <FilterForm filter={this.filter} apiList={this.state.apiList}/>
@@ -115,19 +115,19 @@ class App extends React.Component<Props> {
                     favorites={this.state.favorites}
                   />
                 </main>
-            )}}
-          />
-          <Route
-            exact path="/api/:title"
-            render={({ match }) => {
-              console.log(match)
-              const data = this.state.apiList.find((api) => api.API === match.params.title);
-              if (data) {
-                const myNotes = this.state.savedNotes.find(savedNote => savedNote.name === data.API)
-                const savedNotes = myNotes?.notes.map((note, index) => {
-                  return <Note note={note} key={index} apiName={myNotes.name} deleteNote={this.deleteNote} />
-                })
-                return (
+              )}}
+            />
+            <Route
+              exact path="/api/:title"
+              render={({ match }) => {
+                console.log(match)
+                const data = this.state.apiList.find((api) => api.API === match.params.title);
+                if (data) {
+                  const myNotes = this.state.savedNotes.find(savedNote => savedNote.name === data.API)
+                  const savedNotes = myNotes?.notes.map((note, index) => {
+                    return <Note note={note} key={index} apiName={myNotes.name} deleteNote={this.deleteNote} />
+                  })
+                  return (
                     <main className="api-detail-page">
                       <FeaturedCard 
                         {...data} 
@@ -141,17 +141,18 @@ class App extends React.Component<Props> {
                         {savedNotes}
                       </section>
                     </main>
-                );
-              }
-            }}
-          />
-          <Route render={() => {
-            return (
-              <main>
-                <ErrorMessage statusCode={"404"}/>
-              </main>
-            )
-          }} />
+                  );
+                }
+              }}
+            />
+            <Route render={() => {
+              return (
+                <main>
+                  <ErrorMessage statusCode={"404"}/>
+                </main>
+                )
+              }} 
+            />
           </Switch>
         </div>
       );
