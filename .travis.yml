@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "node"
+notifications:
+  email: false
+
+install: 
+  - npm i
+before_install:
+  - npm i -g npm
+script: 
+  -npm test
+  -npm run build
