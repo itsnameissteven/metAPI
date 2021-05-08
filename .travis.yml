@@ -9,5 +9,5 @@ install:
 before_install:
   - npm i -g npm
 script: 
-  -npm test
-  -npm run build
+  - npm test
+  - npm run build
