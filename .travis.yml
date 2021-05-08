@@ -6,11 +6,13 @@ notifications:
 
 install: 
   - npm i
+
 before_script:
   - npm install -g webpack
   - npm install -g mocha
   - npm install -g chai
   - npm install -g chokidar
-  script: 
+
+script: 
   - npm test
   - npm run build
