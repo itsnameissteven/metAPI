@@ -1,18 +1,22 @@
 language: node_js
 node_js:
-  - "node"
+- node
 notifications:
   email: false
-
-install: 
-  - npm i
-
+install:
+- npm i
 before_script:
-  - npm install -g webpack
-  - npm install -g mocha
-  - npm install -g chai
-  - npm install -g chokidar
-
-script: 
-  - npm test
-  - npm run build
+- npm install -g webpack
+- npm install -g mocha
+- npm install -g chai
+- npm install -g chokidar
+script:
+- npm test
+- npm run build
+deploy:
+  provider: heroku
+  api_key: a7d89452-decb-4027-8d69-e218dcbce452
+  app: metapi-app
+  on:
+    repo: itsnameissteven/metAPI
+  skip_cleanup: 'true'
