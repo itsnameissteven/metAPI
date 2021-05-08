@@ -6,8 +6,10 @@ notifications:
 
 install: 
   - npm i
-before_install:
-  - npm i -g npm
-script: 
+before_script:
+  - npm install -g webpack
+  - npm install -g mocha
+  - npm install -g chai
+  script: 
   - npm test
   - npm run build
